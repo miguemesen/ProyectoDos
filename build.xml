@@ -1,5 +1,5 @@
 
-<project name="java-ci-pipeline" default="dist" basedir=".">
+<project name="CookTime" default="dist" basedir=".">
 
 
     <description>
@@ -26,7 +26,7 @@
         <mkdir dir
 
                        ="${dist}"/>
-        <jar destfile="${dist}/calculator-${version}.${build.number}.jar" basedir="${build}"/>
+        <jar destfile="${dist}/CookTime-${version}.${build.number}.jar" basedir="${build}"/>
     </target>
 
 
