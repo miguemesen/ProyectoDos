@@ -1,9 +1,10 @@
 public class Main {
     public static void main(String[] args){
         System.out.println("smart commit");
+        xd(5);
     }
 
-    public void xd(int number){
+    public static void xd(int number){
         if (number==1){
             System.out.println("xd");
         }
