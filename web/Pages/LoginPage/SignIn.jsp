@@ -11,7 +11,7 @@
     <title>Sign in tab</title>
 </head>
 <body>
-<form action="/Init/" method="get">
+<form action="/register" method="post">
     <p id="logPane">
         User: <input id="UserName" type="text" name="UserName" size="40">
         <br>

@@ -8,31 +8,13 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <style>
-        body{
-            background-color: yellow;
-        }
-
-        #heading{
-            color: black;
-            text-align: center;
-            font-size:40px;
-        }
-        #logPane{
-            align-content: center;
-
-        }
-        h1{
-            background-color: blue;
-        }
-
-    </style>
+    <link rel="stylesheet" href="Pages/LoginPage/LoginCss.css">
 </head>
 <body>
 <h1 id="heading"> Login</h1>
-<form action="/Init/logs" method="post">
+<form action="/logs" method="post">
     <p id="logPane">
-        User: <input id="UserName" type="text" name="UserName" size="40">
+        UserName: <input id="UserName" type="text" name="UserName" size="40">
         <br>
         Password <input id="PassInput" type="password" name="Password" size="40">
     </p>
@@ -40,8 +22,9 @@
 </form>
 <br>
 <br>
-<a href="Pages/LoginPage/SingIn.jsp" target="_self">
+<a href="Pages/LoginPage/SignIn.jsp" target="_self">
   Don't have an account, register now
 </a>
+
 </body>
 </html>

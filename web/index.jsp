@@ -9,11 +9,8 @@
 <html>
   <head>
     <title>Mateme</title>
+    <META HTTP-EQUIV="REFRESH" CONTENT="5;/log">
   </head>
   <body>
-  <h1> Vamos a matar al mundo</h1>
-  <br>
-  <p>Luz Fuego destruccion</p>
-
   </body>
 </html>
