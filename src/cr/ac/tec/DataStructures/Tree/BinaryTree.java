@@ -4,7 +4,7 @@ import cr.ac.tec.DataStructures.LinkedList.List.DoubleList;
 import cr.ac.tec.DataStructures.LinkedList.Nodes.DoubleNode;
 
 public class BinaryTree<T extends Comparable> implements Balancer<T>{
-    protected DoubleNode root;
+    protected DoubleNode<T> root;
     final boolean isEmpty(){
        return root==null;
     }
@@ -20,6 +20,13 @@ public class BinaryTree<T extends Comparable> implements Balancer<T>{
     }
     final public void insertion(T data){
         this.root=insertions(root,data);
+
+    }
+    final public T get(T data){
+        if(data==null)return null;
+        DoubleNode<T> returning =this.getNode(root,data);
+        if(returning==null)return null;
+        return returning.getInfo();
 
     }
     protected DoubleNode<T> insertions(DoubleNode<T> current, T data){
@@ -148,7 +155,9 @@ public class BinaryTree<T extends Comparable> implements Balancer<T>{
     }
     private boolean inTree(DoubleNode<T> Node,T data){
         if(Node==null)return false;
-        if(data.compareTo(Node.getInfo())>0)return inTree(Node.getFront(),data);
+        int value=data.compareTo(Node.getInfo());
+        if (value==0)return true;
+        if(value>0)return inTree(Node.getFront(),data);
         return inTree(Node.getBack(),data);
     }
 }
