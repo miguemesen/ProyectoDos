@@ -1,0 +1,16 @@
+body{
+    background-color: yellow;
+}
+
+#heading{
+    color: black;
+    text-align: center;
+    font-size:40px;
+}
+#logPane{
+    align-content: center;
+
+}
+h1{
+    background-color: blue;
+}
