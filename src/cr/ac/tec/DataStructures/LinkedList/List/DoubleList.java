@@ -1,12 +1,11 @@
 package cr.ac.tec.DataStructures.LinkedList.List;
 
 import cr.ac.tec.DataStructures.LinkedList.Nodes.DoubleNode;
-import cr.ac.tec.Random.Random;
 
 public class DoubleList<T> implements List<T> {
 
-    private DoubleNode<T> head,tail;//The first and last node
-    private int length;// List length
+    protected DoubleNode<T> head,tail;//The first and last node
+    protected int length;// List length
 
     /**
      * Creates an empty list, without any node
@@ -134,11 +133,10 @@ public class DoubleList<T> implements List<T> {
      * @return true if the list its empty, false either
      */
     public boolean isEmpty(){
-        boolean returning=false;
         if(head==null){
-            returning=true;
+            return true;
         }
-        return returning;
+        return false;
     }
 
     /**
@@ -280,20 +278,5 @@ public class DoubleList<T> implements List<T> {
         return length;
     }
 
-    /**
-     *
-     * @return
-     */
-    public DoubleList<T> Shuffle(){
-        DoubleList<T> List=new DoubleList<>();
-        DoubleList<Integer> record=new DoubleList<>();
-        while(List.getLength()<length){
-            int pos= Random.RandomNumber(length)-1;
-            if(record.FindFirstInstancePosition(pos)==-1){
-                record.AddTail(pos);
-                List.AddTail(get(pos));
-            }
-        }
-        return List;
-    }
+
 }

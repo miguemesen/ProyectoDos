@@ -9,6 +9,7 @@ public class ComparableDoubleList<T extends Comparable> extends DoubleList<T> {
      *
      */
     public ComparableDoubleList(){
+        super();
     }
 
     /**

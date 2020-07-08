@@ -54,14 +54,7 @@ public class Stack<T> {
         return null;
     }
 
-    /**
-     * Stir up the stack
-     * @author Andrey Zuñiga
-     */
-    public void Shuffle(){
-        reference=reference.Shuffle();
 
-    }
 
     /**
      * The method checks if it is empty
