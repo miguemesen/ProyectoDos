@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Recipe Form</title>
+    <link rel="stylesheet" type="text/css" href="RecipeFormCss.css">
+    <script type="text/javascript" src="../../Structures/LinkedList.js"></script>
+    <script type="text/javascript" src="RecipePageController.js"></script>
+</head>
+<body>
+<h1 id="MainTitle">Recipe Form</h1>
+<form action="javascript:;" class="Form" onsubmit="handleForm(this)">
+    <div class="Form_RecipeName">
+    <label class="Form_Label"> Recipe Name </label>
+    <input type="text" class="Form_TextInput" name="RecipeName" required placeholder="Recipe Name">
+    </div>
+    <div class="Form_Schedule">
+
+    <label class="Form_Label"> Consuming Schedule </label>
+
+    <input type="radio" class="Form_ScheduleInput" value="0" name="Schedule" checked>BreakFast
+
+    <input type="radio" class="Form_ScheduleInput" value="1" name="Schedule">Lunch
+
+    <input type="radio" class="Form_ScheduleInput" value="2" name="Schedule">Snack
+
+    <input type="radio" class="Form_ScheduleInput" value="3" name="Schedule">Dinner
+
+    <input type="radio" class="Form_ScheduleInput" value="4" name="Schedule">Brunch
+
+    </div>
+
+    <div class="Form_Portions">
+        <label class="Form_Label">Portion's Number</label>
+        <input type="number" class="Form_PortionsInput"name="Portions" min="1" required >
+    </div>
+    <div class="Form_CookingTime">
+        <label class="Form_Label"> Duration </label>
+        <input type="radio" class="Form_CookingTimeInput" value="0" name="CookingTime" checked>Less Tha An Hour
+        <input type="radio" class="Form_CookingTimeInput" value="1" name="CookingTime">Between One and Three Hours
+        <input type="radio" class="Form_CookingTimeInput" value="2" name="CookingTime">A Day
+        <input type="radio" class="Form_CookingTimeInput" value="3" name="CookingTime">Longer Than a Day
+
+    </div>
+
+    <div class="Form_TablePaper">
+        <label class="Form_Label">Table Paper</label>
+        <input type="radio" class="Form_TablePaperInput" value="0" name="TablePaper" checked>Appetizer
+        <input type="radio" class="Form_TablePaperInput" value="1" name="TablePaper">Entry
+        <input type="radio" class="Form_TablePaperInput" value="2" name="TablePaper">Main Dish
+        <input type="radio" class="Form_TablePaperInput" value="3" name="TablePaper">Alcoholic Drink
+        <input type="radio" class="Form_TablePaperInput" value="4" name="TablePaper">Cold Drinks
+        <input type="radio" class="Form_TablePaperInput" value="5" name="TablePaper">Warm Drinks
+        <input type="radio" class="Form_TablePaperInput" value="6" name="TablePaper">Dessert
+
+    </div>
+    <div class="Form_Difficulty">
+        <label class="Form_Label">Difficulty</label>
+        <input class="Form_DifficultyInput" type="range" name="DifficultyRange">
+    </div>
+    <div class="Form_DietType">
+
+        <label class="Form_Label">Diet Type </label>
+
+        <input type="checkbox" class="Form_DietTypeInput" value="0" name="DietType">Vegetarian
+
+        <input type="checkbox" class="Form_DietTypeInput" value="1" name="DietType"> Vegan
+
+        <input type="checkbox" class="Form_DietTypeInput" value="2" name="DietType">Kosher
+
+        <input type="checkbox" class="Form_DietTypeInput" value="3" name="DietType">Celiac
+
+        <input type="checkbox" class="Form_DietTypeInput" value="4" name="DietType">Keto
+
+        <input type="checkbox" class="Form_DietTypeInput" value="5" name="DietType">Carnivorous
+    </div>
+    <div class="Form_RecipeImage">
+        <label class="Form_Label">Image</label>
+        <input type="file" name="RecipeImage" accept=".png" class="Form_RecipeImageInput" required>
+    </div>
+    <div class="Form_Ingredients" id="DivisionIngredients">
+        <label class="Form_Label">Ingredients</label>
+        <input class="Form_IngredientInput" name="IngredientsInput" multiple id="IngredientInput">
+        <button onclick="AddIngredient()" type="button"> Soy un boton</button>
+    </div>
+    <div class="Form_Steps" id="Division_Steps">
+        <label class="Form_Label">Steps</label>
+        <input type="text" class="Form_StepsInput" id="StepsInput" >
+        <button type="button" onclick="AddStep()"> Add StepButton</button>
+
+    </div>
+    <div class="Form_Price">
+        <label class="Form_Label">Price</label>
+        <input type="number" min="0" class="Form_PriceInput" required>
+    </div>
+    <br>
+    <br>
+
+    <input type="submit" title="Done">
+
+
+
+</form>
+</body>
+</html>
