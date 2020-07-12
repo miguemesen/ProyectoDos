@@ -3,6 +3,7 @@ package cr.ac.tec.DataStructures.Tree;
 import cr.ac.tec.DataStructures.LinkedList.List.DoubleList;
 import cr.ac.tec.DataStructures.LinkedList.Nodes.DoubleNode;
 
+
 public class BinaryTree<T extends Comparable> implements Balancer<T>{
     protected DoubleNode<T> root;
     final boolean isEmpty(){

@@ -3,7 +3,7 @@ package cr.ac.tec.DataSaved.ClientLogin;
 
 public class Client implements Comparable {
     private String password;
-    private String UserName;
+    private String UserName;//Email
 
     public Client(String UserName, String PassWord){
         this.password=PassWord;
