@@ -2,19 +2,17 @@ package cr.ac.tec.TextMatching;
 
 import cr.ac.tec.DataStructures.LinkedList.List.DoubleList;
 import cr.ac.tec.DataStructures.LinkedList.List.Set;
-import org.jetbrains.annotations.Nullable;
+
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class TextFinder<T extends Comparable> {
     final int init=0;
-    @Nullable
     public Set<T> matching(DoubleList<T> source, String toFind){
         if(verification(source,toFind)==null)return null;
         return getMatch(source,toFind,new Set<>(null));
     }
-    @Nullable
     protected Set<T> getMatch(DoubleList<T> source, String request, Set<T> returning){
         if(request==null || request.equals(""))return returning;
         if(returning==null)return null;
