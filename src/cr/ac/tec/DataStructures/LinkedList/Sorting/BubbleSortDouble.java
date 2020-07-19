@@ -1,6 +1,6 @@
 package cr.ac.tec.DataStructures.LinkedList.Sorting;
 
-public class BubbleSortDouble<T extends Comparable<T>> extends Sorting<T> {
+public class BubbleSortDouble<T extends Comparable> extends Sorting<T> {
 
     @Override
     public void sort() {

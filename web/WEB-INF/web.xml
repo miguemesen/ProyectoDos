@@ -11,5 +11,14 @@
             c:\apache-tomcat-5.5.29\webapps\data\
         </param-value>
     </context-param>
+    <filter>
+        <filter-name>Login Filter</filter-name>
+        <filter-class>cr.ac.tec.Servlets.LoggedFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>Login Filter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
 
 </web-app>

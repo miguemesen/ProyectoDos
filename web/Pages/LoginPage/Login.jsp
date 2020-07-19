@@ -14,9 +14,9 @@
 <h1 id="heading"> Login</h1>
 <form action="/logs" method="post">
     <p id="logPane">
-        UserName: <input id="UserName" type="text" name="UserName" size="40">
+        UserName: <input id="UserName" type="text" name="UserName" size="40" required>
         <br>
-        Password <input id="PassInput" type="password" name="Password" size="40">
+        Password <input id="PassInput" type="password" name="Password" size="40" required>
     </p>
     <input id="Submit" type="submit" name="send">
 </form>

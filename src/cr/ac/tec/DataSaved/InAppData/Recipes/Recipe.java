@@ -1,6 +1,6 @@
 package cr.ac.tec.DataSaved.InAppData.Recipes;
-
-import cr.ac.tec.DataSaved.ClientLogin.Client;
+import com.google.gson.annotations.Expose;
+import cr.ac.tec.DataSaved.ClientLogin.User;
 import cr.ac.tec.DataSaved.InAppData.Tags.RecipeTags.DietType;
 import cr.ac.tec.DataSaved.InAppData.Tags.RecipeTags.RecipeKind;
 import cr.ac.tec.DataSaved.InAppData.Tags.RecipeTags.RecipeRoll;
@@ -8,80 +8,65 @@ import cr.ac.tec.DataSaved.InAppData.Tags.RecipeTags.RecipeTime;
 import cr.ac.tec.DataSaved.InAppData.Tags.Tagged;
 import cr.ac.tec.DataStructures.LinkedList.List.DoubleList;
 import cr.ac.tec.DataStructures.LinkedList.List.Tools.LinkedListTool;
+import java.util.Arrays;
+import java.util.Date;
 
 public class Recipe implements Tagged {
+    @Expose(serialize = false,deserialize = false)
+    private final static int IDState=0;
+    @Expose(serialize = false, deserialize = false)
+    private final static int DateState=1;
+    @Expose(serialize = false,deserialize = false)
+    private final static int ScoreState=2;
+    @Expose(serialize = false,deserialize = false)
+    private final static int DifficultyState=3;
+    @Expose(serialize = false, deserialize = false)
     private static int IdGiver=0;
     private int id;//Instance identifier
     private String RecipeName;
     private String Author;
     private int portions; //price
     private int amount;
-    private DoubleList<String> Tags;
+    private String[] Tags;
     private int grade; // Recipe Grade
-    private DoubleList<Step> Steps;
-    private DoubleList<Ingredient> IngredientList;
-    private DoubleList<Client> Users; //List of user who have graded the recipe
+    @Expose(serialize = false ,deserialize = false)
+    private int reviewNumber;//Number of user who have reviewed the recipe
+    private String[] Steps;
+    private String[] IngredientList;
+    private DoubleList<User> Users; //List of user who have graded the recipe
+    private Difficulty difficulty;
+    private Date date;
+    @Expose(serialize = false, deserialize = false)
+    private int comparingState=0;
     public Recipe(){
 
     }
     public void build(builder builder){
+        if(builder==null)return;
+        builder.fusing();
         if(builder==null)return;
         this.grade=0;
         this.Users=new DoubleList<>();
         this.id=IdGiver;
         this.RecipeName=builder.RecipeName;
         this.Author=builder.Author;
+        this.difficulty=builder.difficulty;
         this.portions=builder.portions;
         this.amount=builder.amount;
-        this.Steps=builder.steps;
         this.IngredientList=builder.IngredientList;
-        Tags=new DoubleList<>();
-        Tags.AddTail(builder.recipeKind.toString());
- //      Tags.AddTail(builder.recipeTime.toString());
-     //   Tags.AddTail(builder.recipeRoll.toString());
-       //Tags.AddTail(builder.difficulty.toString());
-        //ToStringList method get a List with the String of each member of a DoubleList
-        LinkedListTool<String> Tools=new LinkedListTool<>();
-        DoubleList<String> Diets=Tools.toStringList(builder.dietType);
-        Tags=Tools.Merge(Tags,Diets);
+        this.Steps=builder.Steps;
+        this.Tags=builder.tags;
+        this.date=new Date();
+        this.reviewNumber=0;
         IdGiver++;
     }
-
-    public String getRecipeName() {
-        return RecipeName;
+    public void setScore(int data){
+        this.grade=data;
     }
 
-    public void setRecipeName(String recipeName) {
-        RecipeName = recipeName;
+    public Date getDate() {
+        return date;
     }
-
-    public String getAuthor() {
-        return Author;
-    }
-
-    public void setAuthor(String author) {
-        Author = author;
-    }
-
-    public int getPortions() {
-        return portions;
-    }
-
-    public void setPortions(int portions) {
-        this.portions = portions;
-    }
-
-    public int getAmount() {
-        return amount;
-    }
-
-    public void setAmount(int amount) {
-        this.amount = amount;
-    }
-
-
-
-
 
     @Override
     public int compareTo(Object o) {
@@ -89,10 +74,61 @@ public class Recipe implements Tagged {
         if(o.getClass()!=this.getClass())return 1;
         if(o==this)return 0;
         Recipe Other=(Recipe)o;
+        switch (comparingState){
+            case IDState:
+                return compareByID(Other);
+            case DateState:
+                return compareByDate(Other);
+            case ScoreState:
+                return compareByScore(Other);
+            case DifficultyState:
+                return compareByDifficulty(Other);
+        }
+        return 1;
+    }
+    private int compareByID(Recipe Other){
+        if(Other==null)return 1;
         if(this.id==Other.id)return 0;
         if(this.id>Other.id)return 1;
         return -1;
+    }
+    private int compareByScore(Recipe otherRecipe){
+        if(otherRecipe==null)return 1;
+        if(otherRecipe==this)return 0;
+        if(grade==otherRecipe.grade)return 0;
+        if(grade>otherRecipe.grade)return 1;
+        return -1;
+    }
+    private int compareByDate(Recipe otherRecipe){
+        System.out.println("Llegue al mundo de mew");
+        if(otherRecipe==null)return 1;
+        if(otherRecipe==this)return 0;
+        return date.compareTo(otherRecipe.date);
+    }
+    private int compareByDifficulty(Recipe otherRecipe){
+        if(otherRecipe==null)return 1;
+        if(otherRecipe==this)return 0;
+        return difficulty.compareTo(difficulty);
+    }
+    public void setComparingState(int data){
+        if(data<IDState || data>DifficultyState)return;
+        comparingState=data;
+    }
 
+
+    public String stringing() {
+        return "Recipe{" +
+                "id=" + id +
+                ", RecipeName='" + RecipeName + '\'' +
+                ", Author='" + Author + '\'' +
+                ", portions=" + portions +
+                ", amount=" + amount +
+                ", Tags=" + Arrays.toString(Tags) +
+                ", grade=" + grade +
+                ", Steps=" + Arrays.toString(Steps) +
+                ", IngredientList=" + Arrays.toString(IngredientList) +
+                ", Users=" + Users +
+                '}';
     }
 
     @Override
@@ -102,21 +138,22 @@ public class Recipe implements Tagged {
 
     @Override
     public DoubleList<String> getTags() {
-        return Tags;
+        return null;
     }
-
     public class builder{
         private String RecipeName;
         private String Author;
-        private RecipeKind recipeKind;
         private int portions;
+        private RecipeKind recipeKind;
         private RecipeTime recipeTime;
         private RecipeRoll recipeRoll;
         private Difficulty difficulty;
         private DoubleList<DietType> dietType;
-        private DoubleList<Ingredient> IngredientList;
-        private DoubleList<Step> steps;
+        private String[] IngredientList;
+        private String[] Steps;
+        private String[] tags;
         private int amount;
+
         public builder setRecipeName(String name){
             this.RecipeName=name;
             return this;
@@ -163,23 +200,13 @@ public class Recipe implements Tagged {
             return this;
         }
 
-        public builder setIngredientList(Ingredient... ingredient) {
-            IngredientList = new DoubleList<>();
-            if(ingredient!=null){
-                for(int i=0;i<ingredient.length;i++){
-                    IngredientList.AddTail(ingredient[i]);
-                }
-            }
+        public builder setIngredientList(String... ingredient) {
+            IngredientList=ingredient;
             return this;
         }
 
-        public builder setSteps(Step... steps) {
-            Steps = new DoubleList<>();
-            if(steps!=null){
-                for(int i=0;i<steps.length;i++){
-                    Steps.AddTail(steps[i]);
-                }
-            }
+        public builder setSteps(String... steps) {
+            this.Steps=steps;
             return this;
         }
 
@@ -188,5 +215,17 @@ public class Recipe implements Tagged {
             if(this.amount<0)this.amount=0;
             return this;
         }
+        private void fusing(){
+            DoubleList<String> List=new DoubleList<>();
+            List.AddTail(recipeTime.toString());
+            List.AddTail(recipeKind.toString());
+            List.AddTail(recipeRoll.toString());
+           // List.AddTail(difficulty.toString());
+            LinkedListTool<String> tool=new LinkedListTool<>();
+            DoubleList<String> tempDiets=LinkedListTool.toStringList(dietType);
+            List=tool.Merge(List,tempDiets);
+            this.tags=LinkedListTool.getArray(List);
+        }
+
     }
 }

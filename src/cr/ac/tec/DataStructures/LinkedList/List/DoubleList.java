@@ -262,6 +262,7 @@ public class DoubleList<T> implements List<T> {
      * prints every node
      */
     public void printingB(){
+        if(length<=0)return;
         DoubleNode<T> Temp;
         for(Temp=tail;Temp.getBack()!=null;Temp=Temp.getBack()){
             System.out.println(Temp.getInfo());

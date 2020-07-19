@@ -28,11 +28,9 @@ public class TextMatcherWithTags<T extends Tagged> extends cr.ac.tec.TextMatchin
             for(int j=0;j<List.getLength();j++){
                 if(element.equals(List.get(j)))j=List.getLength();
                 if(j==List.getLength()-1 && !element.equalsIgnoreCase(List.get(j)))return false;
-
             }
         }
         return true;
-
     }
 
 

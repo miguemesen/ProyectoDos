@@ -14,4 +14,12 @@ public class Step {
         if(body==null)return;
         this.body=body;
     }
+
+    @Override
+    public String toString() {
+        return "Step{" +
+                "title='" + title + '\'' +
+                ", body='" + body + '\'' +
+                '}';
+    }
 }

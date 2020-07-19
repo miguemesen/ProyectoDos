@@ -13,9 +13,18 @@
 <body>
 <form action="/register" method="post">
     <p id="logPane">
-        User: <input id="UserName" type="text" name="UserName" size="40">
+        First Name<input id="Name" type="text" name="FirstName" size="40" required>
         <br>
-        Password <input id="PassInput" type="password" name="Password" size="40">
+        First Name<input id="LastName" type="text" name="LastName" size="40" required>
+        <br>
+        User: <input id="UserName" type="text" name="UserName" size="40" required>
+        <br>
+        Password <input id="PassInput" type="password" name="Password" size="40" required>
+        <br>
+        Age <input id="Age" type="number" name="Age" size="40" required>
+        <br>
+
+
     </p>
     <input id="Submit" type="submit" name="register">
 </form>

@@ -2,28 +2,46 @@ package cr.ac.tec.DataStructures.Tree;
 
 import cr.ac.tec.DataStructures.LinkedList.List.DoubleList;
 import cr.ac.tec.DataStructures.LinkedList.Nodes.DoubleNode;
+import cr.ac.tec.TextMatching.TextFinder;
+
+import java.util.ArrayList;
 
 
-public class BinaryTree<T extends Comparable> implements Balancer<T>{
+public class BinaryTree<T extends Comparable> implements Balancer<T> {
     protected DoubleNode<T> root;
+    protected BinaryTreeWayMarker wayMarker;
     final boolean isEmpty(){
        return root==null;
     }
-    final public boolean contains(T data){
+    public BinaryTree(){
+        wayMarker=new NullBinaryTreeWayMarker();
+    }
+    public boolean contains(T data){
         return getNode(root,data)!=null;
 
     }
-    final protected DoubleNode<T> getNode(DoubleNode<T> node,T data){
-        if(node==null || node.getInfo().compareTo(data)==0)return node;
-        if(data.compareTo(node.getInfo())>0)return getNode(node.getFront(),data);
-        else return getNode(node.getBack(),data);
+     protected DoubleNode<T> getNode(DoubleNode<T> node,T data){
+        if(node==null || node.getInfo().compareTo(data)==0){
+            return node;
+        }
+         DoubleNode<T> temp;
+        if(data.compareTo(node.getInfo())>0){
+            wayMarker.addTrace(1);
+            temp= getNode(node.getFront(),data);
+        }
+        else {
+            wayMarker.addTrace(0);
+            temp= getNode(node.getBack(),data);
+        }
+        return Balance(temp);
 
     }
-    final public void insertion(T data){
+    public void insertion(T data){
+        wayMarker.clear();
         this.root=insertions(root,data);
 
     }
-    final public T get(T data){
+     public T get(T data){
         if(data==null)return null;
         DoubleNode<T> returning =this.getNode(root,data);
         if(returning==null)return null;
@@ -37,14 +55,17 @@ public class BinaryTree<T extends Comparable> implements Balancer<T>{
         boolean condition=data.compareTo(current.getInfo())>0;
         if(condition){
             current.setFront(insertions(current.getFront(),data));
+            wayMarker.addTrace(1);
         }
         else{
             current.setBack(insertions(current.getBack(),data));
+            wayMarker.addTrace(0);
         }
 
         return Balance(current);
     }
-    final public void deletion(T data){
+     public void deletion(T data){
+        wayMarker.clear();
         this.root=delete(root,data);
 
     }
@@ -52,9 +73,11 @@ public class BinaryTree<T extends Comparable> implements Balancer<T>{
         if(node==null)return null;
         if(data.compareTo(node.getInfo())>0){
             node.setFront(delete(node.getFront(),data));
+            wayMarker.addTrace(1);
         }
         else if(data.compareTo(node.getInfo())<0){
             node.setBack(delete(node.getBack(),data));
+            wayMarker.addTrace(0);
         }
         else if(node.getBack()==null && node.getFront()==null){
             node=null;
@@ -133,6 +156,14 @@ public class BinaryTree<T extends Comparable> implements Balancer<T>{
         gettingPostOrder(List,node.getFront());
         List.AddTail(node.getInfo());
     }
+    public ArrayList<T> getArrayList(){
+        DoubleList<T> tDoubleList=getListInOrder();
+        ArrayList<T> arrayList=new ArrayList<>();
+        for(int i=0;i<tDoubleList.getLength();i++){
+            arrayList.add(tDoubleList.get(i));
+        }
+        return arrayList;
+    }
     public int getHeight(){
         return getHeight(root);
     }
@@ -161,4 +192,18 @@ public class BinaryTree<T extends Comparable> implements Balancer<T>{
         if(value>0)return inTree(Node.getFront(),data);
         return inTree(Node.getBack(),data);
     }
+    public void append(DoubleList<T> List){
+        if(List==null)return;
+        for(int i=0;i<List.getLength();i++){
+            this.insertion(List.get(i));
+        }
+    }
+    public void append(T[] array){
+        if(array==null)return;
+        for(int p=0;p<array.length;p++){
+            this.insertion(array[p]);
+        }
+
+    }
+
 }
