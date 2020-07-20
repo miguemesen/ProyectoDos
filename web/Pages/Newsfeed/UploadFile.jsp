@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: migue
-  Date: 7/11/2020
-  Time: 3:22 AM
+  Date: 7/12/2020
+  Time: 1:46 AM
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -11,6 +11,7 @@
     <title>Title</title>
 </head>
 <body>
+
 <%@ page import = "java.io.*,java.util.*, javax.servlet.*" %>
 <%@ page import = "javax.servlet.http.*" %>
 <%@ page import = "org.apache.commons.fileupload.*" %>
@@ -28,7 +29,8 @@
     // Verify the content type
     String contentType = request.getContentType();
 
-    if ((contentType.contains("multipart/form-data"))) {
+    if ((contentType.indexOf("multipart/form-data") >= 0)) {
+        System.out.println("entra al if");
         DiskFileItemFactory factory = new DiskFileItemFactory();
         // maximum size that will be stored in memory
         factory.setSizeThreshold(maxMemSize);
@@ -93,5 +95,6 @@
         out.println("</html>");
     }
 %>
+
 </body>
 </html>
