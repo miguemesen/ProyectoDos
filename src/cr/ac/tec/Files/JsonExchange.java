@@ -1,16 +1,43 @@
 package cr.ac.tec.Files;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonParser;
+import com.google.gson.JsonSyntaxException;
 import cr.ac.tec.DataStructures.Tree.BinaryTree;
 
 public class JsonExchange {
-    public static Object getList(String route, Class cl){
-        if(route==null)return null;
-        String text= PlainText.readFile(route);
-        Gson gson=new Gson();
-        Object o= gson.fromJson(text, cl);
-        return o;
+    private static  Gson gson=new Gson();
+    private static JsonParser parser=new JsonParser();
+    public static Object getObjectFromJson(String route, Class cl){
+        try {
+            if (route == null) return null;
+            String text = PlainText.readFile(route);
+            parser.parse(text);
+            Object o = gson.fromJson(text, cl);
+            return o;
+        }
+        catch (Exception exception){
+            return null;
+        }
     }
+    public static void toJsonFromObject(String route, Object object){
+        try {
+           String text= gson.toJson(object);
+            System.out.println(text);
+            PlainText.writeFile(route,text);
+        }
+        catch (Exception e){
+
+        }
+
+    }
+    public static String getStringFromObject(Object object){
+        try {
+            return gson.toJson(object);
+        }
+        catch (Exception e){return "";}
+    }
+
 
 
 }

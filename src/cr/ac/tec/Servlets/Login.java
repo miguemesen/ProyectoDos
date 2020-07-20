@@ -11,7 +11,6 @@ import java.io.IOException;
 public class Login extends HttpServlet {
     private String Name;
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-      // request.getCookies()
         RequestDispatcher requestDispatcher=request.getRequestDispatcher("/Pages/LoginPage/Login.jsp");
         requestDispatcher.forward(request,response);
 

@@ -1,17 +1,17 @@
 package cr.ac.tec.DataSaved.ClientLogin;
 
 
+import cr.ac.tec.DataSaved.InAppData.Recipes.MyMenu.MyMenu;
 import cr.ac.tec.DataSaved.InAppData.Recipes.Recipe;
-
+import cr.ac.tec.DataSaved.Interfaces.RecipeOwners;
 import java.util.ArrayList;
 
-public class User implements Comparable {
+public class User extends RecipeOwners {
     private String FirstName;
     private String LastName;
     private String UserName;//Email
     private String password;
     private int age;
-    private ArrayList<Recipe> MyMenu;
     private ArrayList<User> follows;
     private ArrayList<User> followers;
 
@@ -19,11 +19,11 @@ public class User implements Comparable {
         this.password=PassWord;
         this.UserName= UserName;
         this.age=age;
-        this.MyMenu=new ArrayList<>();
         this.followers=new ArrayList<>();
         this.follows=new ArrayList<>();
         this.LastName=LastName;
         this.FirstName=FirstName;
+       this.myMenu=new MyMenu(this);
     }
     public void setPassword(String password) {
         this.password = password;
@@ -41,18 +41,48 @@ public class User implements Comparable {
         return UserName;
     }
 
+    public String getFirstName() {
+        return FirstName;
+    }
+    public void setRecipe(ArrayList<Recipe> array){
+
+    }
+
+    public void setFirstName(String firstName) {
+        FirstName = firstName;
+    }
+
+    public String getLastName() {
+        return LastName;
+    }
+
+    public void setLastName(String lastName) {
+        LastName = lastName;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
     public void AddFollower(User user){
+        if(user==null)return;
         this.followers.add(user);
         user.follows.add(this);
     }
+    public void AddFollows(User user){
+        if(user==null)return;
+        this.follows.add(user);
+        user.followers.add(user);
+    }
     public void addRecipe(Recipe recipe){
-        MyMenu.add(recipe);
+        myMenu.add(recipe);
     }
-    public ArrayList<Recipe> getMyMenu(){
-        return this.MyMenu;
-    }
-    public void setRecipe(ArrayList<Recipe> recipe){
-        this.MyMenu=recipe;
+    public MyMenu getMyMenu(){
+        return this.myMenu;
     }
 
     @Override
@@ -81,5 +111,12 @@ public class User implements Comparable {
                 "UserName='" + UserName + '\'' +
                 ", password='" + password + '\'' +
                 '}';
+    }
+
+    @Override
+    public ArrayList<User> getOwner() {
+        ArrayList<User> member=new ArrayList<>();
+        member.add(this);
+        return member;
     }
 }

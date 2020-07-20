@@ -6,8 +6,11 @@ import cr.ac.tec.DataSaved.InAppData.Tags.RecipeTags.RecipeKind;
 import cr.ac.tec.DataSaved.InAppData.Tags.RecipeTags.RecipeRoll;
 import cr.ac.tec.DataSaved.InAppData.Tags.RecipeTags.RecipeTime;
 import cr.ac.tec.DataSaved.InAppData.Tags.Tagged;
+import cr.ac.tec.DataStructures.LinkedList.List.Adapter.ArrayListAdapter;
 import cr.ac.tec.DataStructures.LinkedList.List.DoubleList;
 import cr.ac.tec.DataStructures.LinkedList.List.Tools.LinkedListTool;
+
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 
@@ -27,7 +30,7 @@ public class Recipe implements Tagged {
     private String Author;
     private int portions; //price
     private int amount;
-    private String[] Tags;
+    private ArrayList<String> Tags;
     private int grade; // Recipe Grade
     @Expose(serialize = false ,deserialize = false)
     private int reviewNumber;//Number of user who have reviewed the recipe
@@ -123,7 +126,7 @@ public class Recipe implements Tagged {
                 ", Author='" + Author + '\'' +
                 ", portions=" + portions +
                 ", amount=" + amount +
-                ", Tags=" + Arrays.toString(Tags) +
+                ", Tags=" + Tags +
                 ", grade=" + grade +
                 ", Steps=" + Arrays.toString(Steps) +
                 ", IngredientList=" + Arrays.toString(IngredientList) +
@@ -138,7 +141,8 @@ public class Recipe implements Tagged {
 
     @Override
     public DoubleList<String> getTags() {
-        return null;
+        return new ArrayListAdapter<String>(Tags);
+
     }
     public class builder{
         private String RecipeName;
@@ -151,7 +155,7 @@ public class Recipe implements Tagged {
         private DoubleList<DietType> dietType;
         private String[] IngredientList;
         private String[] Steps;
-        private String[] tags;
+        private ArrayList<String> tags;
         private int amount;
 
         public builder setRecipeName(String name){
@@ -224,7 +228,7 @@ public class Recipe implements Tagged {
             LinkedListTool<String> tool=new LinkedListTool<>();
             DoubleList<String> tempDiets=LinkedListTool.toStringList(dietType);
             List=tool.Merge(List,tempDiets);
-            this.tags=LinkedListTool.getArray(List);
+            this.tags=tool.toJavaList(List);
         }
 
     }

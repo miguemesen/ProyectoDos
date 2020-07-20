@@ -8,7 +8,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-@WebFilter(urlPatterns = "/*")
+@WebFilter(urlPatterns = "/perro")
 public class LoggedFilter implements Filter {
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {

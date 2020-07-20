@@ -29,7 +29,7 @@ public class Main2 {
         }
         catch (Exception e){}
 
-        Recipe recipe1=(Recipe) JsonExchange.getList("pruebas.json",Recipe.class);
+        Recipe recipe1=(Recipe) JsonExchange.getObjectFromJson("pruebas.json",Recipe.class);
        // System.out.println(recipe.stringing());
 
     }

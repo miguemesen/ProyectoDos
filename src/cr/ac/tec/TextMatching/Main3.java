@@ -38,7 +38,7 @@ public class Main3 {
         User user=new User("Pedro","Carlos","","",123);
         user.setRecipe(recipes);
        MyMenuManager.sortByDate(user);
-        recipes=user.getMyMenu();
+        recipes=user.getMyMenu().getRecipes();
         for(int i=0;i<recipes.size();i++){
             System.out.println(recipes.get(i));
         }

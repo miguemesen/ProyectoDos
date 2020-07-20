@@ -34,9 +34,7 @@ public class MyMenuManager {
     }
     public static DoubleList<Recipe> Verification(User user){
         if(user==null)return null;
-        return transformation(user.getMyMenu());
-
-
+        return transformation(user.getMyMenu().getRecipes());
     }
     public  static DoubleList<Recipe> transformation(ArrayList<Recipe> recipes){
         return recipeManager.tDoubleList(recipes);
