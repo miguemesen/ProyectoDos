@@ -1,7 +1,7 @@
 package cr.ac.tec.Servlets;
 
 import cr.ac.tec.DataSaved.ClientLogin.User;
-import cr.ac.tec.DataSaved.ClientLogin.UserTree;
+import cr.ac.tec.DataSaved.InfoTree.UserTree;
 import cr.ac.tec.Files.JsonExchange;
 import cr.ac.tec.MD5.MD5;
 

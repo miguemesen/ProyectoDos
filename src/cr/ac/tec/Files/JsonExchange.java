@@ -17,6 +17,7 @@ public class JsonExchange {
             return o;
         }
         catch (Exception exception){
+            System.out.println(exception.getMessage());
             return null;
         }
     }

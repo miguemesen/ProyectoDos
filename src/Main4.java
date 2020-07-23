@@ -1,9 +1,5 @@
 import com.google.gson.Gson;
 import cr.ac.tec.DataSaved.ClientLogin.User;
-import cr.ac.tec.DataSaved.InAppData.Recipes.MyMenu.MyMenu;
-import cr.ac.tec.DataSaved.InAppData.Recipes.Recipe;
-import cr.ac.tec.DataSaved.Profile;
-import cr.ac.tec.Files.JsonExchange;
 import cr.ac.tec.Files.PlainText;
 
 public class Main4 {
@@ -21,7 +17,7 @@ public class Main4 {
         String text=gson.toJson(userA);
        // MyMenu myMenu=new MyMenu(user);
         //text=gson.toJson(myMenu);
-       // Profile profile=new Profile();
+       // ProfileUser profile=new ProfileUser();
         PlainText.writeFile("eureka.json",text);
 
 

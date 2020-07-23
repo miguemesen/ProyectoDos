@@ -18,7 +18,7 @@ import java.util.Enumeration;
 @WebServlet(name = "Upload",value = "/Upload")
 public class UploadFiles extends HttpServlet {
     private final static String recipe="C:\\Tecnologico de Costa Rica\\Tercer Semestre\\Algoritmos y estructuras\\COOKTIMEProyect\\web\\Resources\\Recipes";
-    private final static String profileImage ="/Resources/Profile/User";
+    private final static String profileImage ="/Resources/ProfileUser/User";
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         MultipartRequest mrequest = new MultipartRequest(req, recipe);

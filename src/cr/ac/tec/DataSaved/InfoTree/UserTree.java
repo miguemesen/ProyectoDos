@@ -1,17 +1,16 @@
-package cr.ac.tec.DataSaved.ClientLogin;
+package cr.ac.tec.DataSaved.InfoTree;
 
-import com.google.gson.Gson;
-
-import cr.ac.tec.DataSaved.InfoTree;
+import cr.ac.tec.DataSaved.ClientLogin.User;
 import cr.ac.tec.DataStructures.Tree.BinaryTree;
 import cr.ac.tec.Files.JsonExchange;
 
 public class UserTree extends InfoTree<User> {
     private static UserTree instance;
     private UserTree(){
+
+        route="C:\\Tecnologico de Costa Rica\\Tercer Semestre\\Algoritmos y estructuras\\COOKTIMEProyect\\web\\Resources\\JsonFiles\\Users.json";
         Tree=new BinaryTree<>();
         this.getData();
-        this.route="C:\\Tecnologico de Costa Rica\\Tercer Semestre\\Algoritmos y estructuras\\COOKTIMEProyect\\web\\Resources\\JsonFiles\\Users.json";
     }
 
     public static UserTree getInstance(){

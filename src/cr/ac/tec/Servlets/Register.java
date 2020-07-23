@@ -1,7 +1,7 @@
 package cr.ac.tec.Servlets;
 
 import cr.ac.tec.DataSaved.ClientLogin.User;
-import cr.ac.tec.DataSaved.ClientLogin.UserTree;
+import cr.ac.tec.DataSaved.InfoTree.UserTree;
 import cr.ac.tec.MD5.MD5;
 
 import javax.servlet.RequestDispatcher;
@@ -21,7 +21,7 @@ public class Register extends HttpServlet {
     private static final String Age="Age";
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
+        doPost(req,resp);
 
     }
 

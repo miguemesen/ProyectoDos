@@ -4,17 +4,19 @@ package cr.ac.tec.DataSaved.ClientLogin;
 import cr.ac.tec.DataSaved.InAppData.Recipes.MyMenu.MyMenu;
 import cr.ac.tec.DataSaved.InAppData.Recipes.Recipe;
 import cr.ac.tec.DataSaved.Interfaces.RecipeOwners;
+import cr.ac.tec.DataSaved.Profiles.ProfileUser;
+
 import java.util.ArrayList;
 
 public class User extends RecipeOwners {
-    private String FirstName;
-    private String LastName;
-    private String UserName;//Email
-    private String password;
-    private int age;
-    private ArrayList<User> follows;
-    private ArrayList<User> followers;
-
+    protected String FirstName;
+    protected String LastName;
+    protected String UserName;//Email
+    protected String password;
+    protected int age;
+    protected ArrayList<String> follows;
+    protected ArrayList<String> followers;
+    protected ProfileUser profileStructure;
     public User(String UserName, String PassWord,String FirstName,String LastName, int age){
         this.password=PassWord;
         this.UserName= UserName;
@@ -23,7 +25,11 @@ public class User extends RecipeOwners {
         this.follows=new ArrayList<>();
         this.LastName=LastName;
         this.FirstName=FirstName;
-       this.myMenu=new MyMenu(this);
+        MyMenu myMenu=new MyMenu();
+       this.profileStructure=new ProfileUser(myMenu);
+    }
+    public User(String UserName,String password){
+        this(UserName,password,"","",0);//generics parameters
     }
     public void setPassword(String password) {
         this.password = password;
@@ -70,19 +76,24 @@ public class User extends RecipeOwners {
 
     public void AddFollower(User user){
         if(user==null)return;
-        this.followers.add(user);
-        user.follows.add(this);
+        this.followers.add(user.UserName);
+        user.follows.add(this.UserName);
     }
     public void AddFollows(User user){
         if(user==null)return;
-        this.follows.add(user);
-        user.followers.add(user);
+        this.follows.add(user.UserName);
+        user.followers.add(user.UserName);
     }
     public void addRecipe(Recipe recipe){
-        myMenu.add(recipe);
+        this.profileStructure.getMyMenu().add(recipe);
     }
     public MyMenu getMyMenu(){
-        return this.myMenu;
+        return this.profileStructure.getMyMenu();
+    }
+
+    @Override
+    public String getIdentifier() {
+        return UserName;
     }
 
     @Override
@@ -113,10 +124,4 @@ public class User extends RecipeOwners {
                 '}';
     }
 
-    @Override
-    public ArrayList<User> getOwner() {
-        ArrayList<User> member=new ArrayList<>();
-        member.add(this);
-        return member;
-    }
 }

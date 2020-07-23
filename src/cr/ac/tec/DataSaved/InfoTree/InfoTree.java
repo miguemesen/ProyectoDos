@@ -1,11 +1,7 @@
-package cr.ac.tec.DataSaved;
+package cr.ac.tec.DataSaved.InfoTree;
 
-import com.google.gson.Gson;
-import cr.ac.tec.DataSaved.ClientLogin.User;
-import cr.ac.tec.DataSaved.ClientLogin.UserTree;
 import cr.ac.tec.DataStructures.Tree.BinaryTree;
 import cr.ac.tec.Files.JsonExchange;
-import cr.ac.tec.Files.PlainText;
 import cr.ac.tec.Files.jsonSource;
 
 import java.util.ArrayList;
@@ -37,6 +33,11 @@ public abstract class InfoTree<T extends Comparable> implements jsonSource {
             System.out.println(arrayList.get(i));
         }
         JsonExchange.toJsonFromObject(route,arrayList);
+    }
+    public boolean fullCheck(T Member){
+        T temp=getMember(Member);
+        if(temp==null)return false;
+        return Member.equals(temp);
     }
 
 

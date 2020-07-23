@@ -6,6 +6,9 @@ import cr.ac.tec.DataSaved.InAppData.Tags.RecipeTags.RecipeKind;
 import cr.ac.tec.DataSaved.InAppData.Tags.RecipeTags.RecipeRoll;
 import cr.ac.tec.DataSaved.InAppData.Tags.RecipeTags.RecipeTime;
 import cr.ac.tec.DataSaved.InAppData.Tags.Tagged;
+import cr.ac.tec.DataSaved.InfoTree.ChefTree;
+import cr.ac.tec.DataSaved.InfoTree.UserTree;
+import cr.ac.tec.DataSaved.Interfaces.RecipeOwners;
 import cr.ac.tec.DataStructures.LinkedList.List.Adapter.ArrayListAdapter;
 import cr.ac.tec.DataStructures.LinkedList.List.DoubleList;
 import cr.ac.tec.DataStructures.LinkedList.List.Tools.LinkedListTool;
@@ -25,6 +28,8 @@ public class Recipe implements Tagged {
     private final static int DifficultyState=3;
     @Expose(serialize = false, deserialize = false)
     private static int IdGiver=0;
+    @Expose(serialize = false,deserialize = false)
+    private ArrayList<String> subscribers;
     private int id;//Instance identifier
     private String RecipeName;
     private String Author;
@@ -32,14 +37,11 @@ public class Recipe implements Tagged {
     private int amount;
     private ArrayList<String> Tags;
     private int grade; // Recipe Grade
-    @Expose(serialize = false ,deserialize = false)
     private int reviewNumber;//Number of user who have reviewed the recipe
     private String[] Steps;
     private String[] IngredientList;
-    private DoubleList<User> Users; //List of user who have graded the recipe
     private Difficulty difficulty;
     private Date date;
-    @Expose(serialize = false, deserialize = false)
     private int comparingState=0;
     public Recipe(){
 
@@ -49,7 +51,6 @@ public class Recipe implements Tagged {
         builder.fusing();
         if(builder==null)return;
         this.grade=0;
-        this.Users=new DoubleList<>();
         this.id=IdGiver;
         this.RecipeName=builder.RecipeName;
         this.Author=builder.Author;
@@ -61,6 +62,7 @@ public class Recipe implements Tagged {
         this.Tags=builder.tags;
         this.date=new Date();
         this.reviewNumber=0;
+        this.subscribers=new ArrayList<>();
         IdGiver++;
     }
     public void setScore(int data){
@@ -117,6 +119,23 @@ public class Recipe implements Tagged {
         if(data<IDState || data>DifficultyState)return;
         comparingState=data;
     }
+    public void abbObserver(RecipeOwners recipeOwners){
+        if(recipeOwners==null)return;
+        subscribers.add(recipeOwners.toString());
+    }
+    public void deleteObserver(RecipeOwners recipeOwners){
+        if(recipeOwners==null)return;
+        if(!subscribers.contains(recipeOwners.toString()))return;
+        subscribers.remove(recipeOwners.toString());
+    }
+    public void deleteRecipe(){
+        UserTree userTree=UserTree.getInstance();
+        ChefTree chefTree=ChefTree.getInstance();
+        for(int i=0;i<subscribers.size();i++){
+
+            //subscribers.get(i).getMyMenu().delete(this);
+        }
+    }
 
 
     public String stringing() {
@@ -130,7 +149,6 @@ public class Recipe implements Tagged {
                 ", grade=" + grade +
                 ", Steps=" + Arrays.toString(Steps) +
                 ", IngredientList=" + Arrays.toString(IngredientList) +
-                ", Users=" + Users +
                 '}';
     }
 
