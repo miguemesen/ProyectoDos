@@ -3,7 +3,6 @@ package cr.ac.tec.DataStructures.Tree;
 import cr.ac.tec.DataStructures.LinkedList.Nodes.DoubleNode;
 import cr.ac.tec.DataStructures.Stack.Stack;
 
-import javax.persistence.criteria.CriteriaBuilder;
 
 public class SplayTree<T extends Comparable>  extends AVLTree<T>{
     public SplayTree(){

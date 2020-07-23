@@ -25,7 +25,7 @@ public class AuthenticatingUser extends HttpServlet {
         password= MD5.getMD5(password);
         String result= TreeConsultant.getUser(name,password);
         if(result=="'")result="No encontre nada";
-        printWriter.println(result);
+        printWriter.print(result);
     }
 
     @Override

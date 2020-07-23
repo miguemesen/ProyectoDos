@@ -20,7 +20,7 @@ public class AuthenticateUser extends HttpServlet {
     private final String DMT="";
     private final int NO=0;
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.setContentType("application/json");
+        //response.setContentType("application/json");
         String toReturn;
         PrintWriter printWriter=response.getWriter();
         UserTree userTree= UserTree.getInstance();
@@ -46,7 +46,8 @@ public class AuthenticateUser extends HttpServlet {
             //requestDispatcher = request.getRequestDispatcher("/Pages/LoginPage/Logged.jsp");
         }
         //requestDispatcher.forward(request,response);
-        printWriter.println(toReturn);
+        printWriter.print(toReturn);
+
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
