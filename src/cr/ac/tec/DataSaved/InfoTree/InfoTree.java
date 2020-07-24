@@ -1,5 +1,6 @@
 package cr.ac.tec.DataSaved.InfoTree;
 
+import cr.ac.tec.DataStructures.LinkedList.List.DoubleList;
 import cr.ac.tec.DataStructures.Tree.BinaryTree;
 import cr.ac.tec.Files.JsonExchange;
 import cr.ac.tec.Files.jsonSource;
@@ -38,6 +39,9 @@ public abstract class InfoTree<T extends Comparable> implements jsonSource {
         T temp=getMember(Member);
         if(temp==null)return false;
         return Member.equals(temp);
+    }
+    public DoubleList<T> getList(){
+        return Tree.getListInOrder();
     }
 
 

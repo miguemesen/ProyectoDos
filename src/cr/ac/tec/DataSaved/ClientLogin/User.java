@@ -14,8 +14,6 @@ public class User extends RecipeOwners {
     protected String UserName;//Email
     protected String password;
     protected int age;
-    protected ArrayList<String> follows;
-    protected ArrayList<String> followers;
     protected ProfileUser profileStructure;
     public User(String UserName, String PassWord,String FirstName,String LastName, int age){
         this.password=PassWord;
@@ -74,22 +72,17 @@ public class User extends RecipeOwners {
         this.age = age;
     }
 
-    public void AddFollower(User user){
-        if(user==null)return;
-        this.followers.add(user.UserName);
-        user.follows.add(this.UserName);
-    }
-    public void AddFollows(User user){
-        if(user==null)return;
-        this.follows.add(user.UserName);
-        user.followers.add(user.UserName);
-    }
+    @Override
     public void addRecipe(Recipe recipe){
         this.profileStructure.getMyMenu().add(recipe);
     }
+    @Override
     public MyMenu getMyMenu(){
         return this.profileStructure.getMyMenu();
     }
+
+
+
 
     @Override
     public String getIdentifier() {
@@ -118,10 +111,7 @@ public class User extends RecipeOwners {
 
     @Override
     public String toString() {
-        return "User{" +
-                "UserName='" + UserName + '\'' +
-                ", password='" + password + '\'' +
-                '}';
+        return UserName;
     }
 
 }

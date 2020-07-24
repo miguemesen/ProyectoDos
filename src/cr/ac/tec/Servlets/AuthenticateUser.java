@@ -45,7 +45,6 @@ public class AuthenticateUser extends HttpServlet {
             toReturn= JsonExchange.getStringFromObject(user2);
             //requestDispatcher = request.getRequestDispatcher("/Pages/LoginPage/Logged.jsp");
         }
-        //requestDispatcher.forward(request,response);
         printWriter.println(toReturn);
     }
 

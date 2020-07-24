@@ -1,13 +1,16 @@
 package cr.ac.tec.DataSaved.Company;
 
 import cr.ac.tec.DataSaved.ClientLogin.User;
+import cr.ac.tec.DataSaved.InAppData.Recipes.MyMenu.MyMenu;
 import cr.ac.tec.DataSaved.InAppData.Recipes.Recipe;
 import cr.ac.tec.DataSaved.Interfaces.RecipeOwners;
+import cr.ac.tec.DataSaved.Profiles.ProfileCompany;
 
 import java.util.ArrayList;
 import java.util.Objects;
 
 public class Company extends RecipeOwners {
+    private ProfileCompany profileCompany;
     private String CompanyName;// it unique
     private Schedule schedule;
     private  ArrayList<User> Members;
@@ -18,7 +21,11 @@ public class Company extends RecipeOwners {
         builder.End(End);
         builder.Init(Init);
         this.schedule=new Schedule(builder);
+        this.profileCompany=new ProfileCompany(new MyMenu());
         Members= new ArrayList<>();
+    }
+    public Company(String name){
+        this.CompanyName=name;
     }
     public void addMember(User...users){
         if(users==null)return;
@@ -27,9 +34,13 @@ public class Company extends RecipeOwners {
         }
     }
     public void addRecipe(Recipe recipe){
-
+        profileCompany.addRecipe(recipe);
     }
 
+    @Override
+    public MyMenu getMyMenu() {
+        return profileCompany.getMyMenu();
+    }
     @Override
     public int compareTo(Object o) {
         if(o==null)return 1;
@@ -37,7 +48,6 @@ public class Company extends RecipeOwners {
         Company company=(Company)o;
         return this.CompanyName.compareTo(company.CompanyName);
     }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -46,12 +56,10 @@ public class Company extends RecipeOwners {
         return Objects.equals(CompanyName, company.CompanyName) &&
                 Objects.equals(Members, company.Members);
     }
-
     @Override
     public int hashCode() {
         return Objects.hash(CompanyName, Members);
     }
-
     @Override
     public String getIdentifier() {
         return  this.CompanyName;
