@@ -48,9 +48,6 @@ public class User extends RecipeOwners {
     public String getFirstName() {
         return FirstName;
     }
-    public void setRecipe(ArrayList<Recipe> array){
-
-    }
 
     public void setFirstName(String firstName) {
         FirstName = firstName;
@@ -76,6 +73,12 @@ public class User extends RecipeOwners {
     public void addRecipe(Recipe recipe){
         this.profileStructure.getMyMenu().add(recipe);
     }
+
+    @Override
+    public void setRecipe(ArrayList<Recipe> array) {
+       profileStructure.getMyMenu().setRecipes(array);
+    }
+
     @Override
     public MyMenu getMyMenu(){
         return this.profileStructure.getMyMenu();

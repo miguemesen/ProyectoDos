@@ -18,10 +18,6 @@ public class Main7 {
         System.out.println(recipeOwners);
         User user=(User)recipeOwners;
        ArrayList<String> arrayList= user.getFollows();
-       for(int i=0;i<arrayList.size();i++){
-           System.out.println(arrayList.get(i));
-       }
-
        ArrayList<Recipe> recipes= TreeConsultant.getSuggestions(recipeOwners);
        for(int i=0;i<recipes.size();i++){
            System.out.println(recipes.get(i));

@@ -3,6 +3,7 @@ package cr.ac.tec;
 import com.google.gson.Gson;
 import cr.ac.tec.DataSaved.ClientLogin.User;
 import cr.ac.tec.DataSaved.InAppData.Recipes.*;
+import cr.ac.tec.DataSaved.InfoTree.RecipeTree;
 import cr.ac.tec.Files.JsonExchange;
 
 import java.io.FileWriter;
@@ -12,6 +13,8 @@ public class Main2 {
         Recipe recipe=new Recipe();
         Recipe.builder builder=recipe.new builder().setRecipeKind("Lunch").setDietType("Vegetarian").setRecipeName("Rice and beans").setAuthor("TitoDiaz").setIngredientList("beans","rice","steak").setAmount(44).setDifficulty(new Difficulty(50)).setPortions(4).setRecipeRoll("WarmDrink").setRecipeTime("LongTime").setSteps("Bata los huevos");
         recipe.build(builder);
+        RecipeTree recipeTree=RecipeTree.getInstance();
+        recipeTree.attach(recipe);
         User user =new User("Eduardo","BokuNoPico","","",85);
         user.addRecipe(recipe);
         Gson gson=new Gson();

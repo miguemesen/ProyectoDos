@@ -7,6 +7,7 @@ import cr.ac.tec.DataSaved.InAppData.Tags.RecipeTags.RecipeRoll;
 import cr.ac.tec.DataSaved.InAppData.Tags.RecipeTags.RecipeTime;
 import cr.ac.tec.DataSaved.InAppData.Tags.Tagged;
 import cr.ac.tec.DataSaved.InfoTree.ChefTree;
+import cr.ac.tec.DataSaved.InfoTree.TreeConsultant;
 import cr.ac.tec.DataSaved.InfoTree.UserTree;
 import cr.ac.tec.DataSaved.Interfaces.RecipeOwners;
 import cr.ac.tec.DataStructures.LinkedList.List.Adapter.ArrayListAdapter;
@@ -28,7 +29,6 @@ public class Recipe implements Tagged {
     private final static int DifficultyState=3;
     @Expose(serialize = false, deserialize = false)
     private static int IdGiver=0;
-    @Expose(serialize = false,deserialize = false)
     private ArrayList<String> subscribers;
     private int id;//Instance identifier
     private String RecipeName;
@@ -45,6 +45,9 @@ public class Recipe implements Tagged {
     private int comparingState=0;
     public Recipe(){
 
+    }
+    public Recipe(int ID){
+        this.id=ID;
     }
     public void build(builder builder){
         if(builder==null)return;
@@ -71,6 +74,9 @@ public class Recipe implements Tagged {
 
     public Date getDate() {
         return date;
+    }
+    public int getID(){
+        return id;
     }
 
     @Override
@@ -129,15 +135,10 @@ public class Recipe implements Tagged {
         subscribers.remove(recipeOwners.toString());
     }
     public void deleteRecipe(){
-        UserTree userTree=UserTree.getInstance();
-        ChefTree chefTree=ChefTree.getInstance();
         for(int i=0;i<subscribers.size();i++){
-
-            //subscribers.get(i).getMyMenu().delete(this);
+            TreeConsultant.RecipeOwner(subscribers.get(i)).getMyMenu().delete(this);
         }
     }
-
-
     public String stringing() {
         return "Recipe{" +
                 "id=" + id +

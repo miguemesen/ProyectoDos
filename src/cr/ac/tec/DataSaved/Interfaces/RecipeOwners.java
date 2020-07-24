@@ -12,6 +12,7 @@ public abstract class RecipeOwners implements Comparable {
     protected ArrayList<String> followers;
     public abstract String getIdentifier();
     public abstract void addRecipe(Recipe recipe);
+    public abstract void setRecipe(ArrayList<Recipe> array);
     public abstract MyMenu getMyMenu();
 
     public ArrayList<String> getFollowers() {

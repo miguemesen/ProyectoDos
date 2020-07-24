@@ -38,6 +38,11 @@ public class Company extends RecipeOwners {
     }
 
     @Override
+    public void setRecipe(ArrayList<Recipe> array) {
+        profileCompany.getMyMenu().setRecipes(array);
+    }
+
+    @Override
     public MyMenu getMyMenu() {
         return profileCompany.getMyMenu();
     }
