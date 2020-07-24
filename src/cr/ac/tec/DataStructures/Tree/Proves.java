@@ -1,6 +1,5 @@
 package cr.ac.tec.DataStructures.Tree;
 
-import javax.persistence.criteria.CriteriaBuilder;
 
 public class Proves {
     public static void main(String[] args) {
