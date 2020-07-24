@@ -16,7 +16,7 @@ import java.io.IOException;
 public class RecipeForm extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.doGet(req, resp);
+        doPost(req, resp);
     }
 
     @Override
@@ -48,6 +48,7 @@ public class RecipeForm extends HttpServlet {
         TreeConsultant.RecipeOwner(UserName).addRecipe(recipe);
         RecipeTree recipeTree=new RecipeTree();
         recipeTree.attach(recipe);
+        resp.getWriter().print("HolaHOLA");
 
     }
 }
