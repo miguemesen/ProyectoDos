@@ -10,7 +10,7 @@ public class RecipeTree extends InfoTree<Recipe> {
     private static RecipeTree instance;
     public RecipeTree(){
         Tree=new BinaryTree<>();
-        route="C:\\Tecnologico de Costa Rica\\Tercer Semestre\\Algoritmos y estructuras\\COOKTIMEProyect\\web\\Resources\\JsonFiles\\Recipes.json";
+        route="C:\\Users\\Gabriel Solano\\Documents\\GitHub\\SegundoProyectoDatos1\\web\\Resources\\JsonFiles\\Recipes.json";
         getData();
     }
     public static RecipeTree getInstance(){
