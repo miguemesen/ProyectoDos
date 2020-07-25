@@ -34,7 +34,7 @@ public class Recipe implements Tagged<Recipe> {
     private int amount;
     private ArrayList<String> Tags;
     private ArrayList<Comment> comments;
-    private int grade; // Recipe Grade
+    private double grade; // Recipe Grade
     private int reviewNumber=0;//Number of user who have reviewed the recipe
     private String[] Steps;
     private String[] IngredientList;
@@ -75,6 +75,11 @@ public class Recipe implements Tagged<Recipe> {
     }
     public int getID(){
         return id;
+    }
+    public void rate(int rate){
+        reviewNumber++;
+        this.grade=(reviewNumber-1)*grade+rate;
+        this.grade=grade/reviewNumber;
     }
     public void addComment(RecipeOwners recipeOwners,String text){
         comments.add(new Comment(recipeOwners.toString(),text));
@@ -171,7 +176,7 @@ public class Recipe implements Tagged<Recipe> {
     @Override
     public int getNumber() {
         if(comparingState==IDState)return id;
-        if(comparingState==ScoreState)return grade;
+        if(comparingState==ScoreState)return (int) grade;
         if(comparingState==DifficultyState)return difficulty.getNumber();
         return id;
 
