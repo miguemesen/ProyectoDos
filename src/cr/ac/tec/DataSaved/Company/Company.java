@@ -33,6 +33,7 @@ public class Company extends RecipeOwners {
             Members.add(users[i]);
         }
     }
+    @Override
     public void addRecipe(Recipe recipe){
         profileCompany.addRecipe(recipe);
     }
@@ -68,5 +69,10 @@ public class Company extends RecipeOwners {
     @Override
     public String getIdentifier() {
         return  this.CompanyName;
+    }
+
+    @Override
+    public String toString() {
+        return CompanyName;
     }
 }

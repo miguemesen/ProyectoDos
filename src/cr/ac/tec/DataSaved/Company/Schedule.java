@@ -2,7 +2,6 @@ package cr.ac.tec.DataSaved.Company;
 
 import java.time.DayOfWeek;
 import java.util.ArrayList;
-
 public class Schedule {
     private ArrayList<DayOfWeek>Days;
     private double InitTime;
@@ -12,7 +11,6 @@ public class Schedule {
         builder.build();
         this.Days=builder.Days;
     }
-
     public static class Builder{
         private ArrayList<DayOfWeek> Days;
         private double InitTime;
