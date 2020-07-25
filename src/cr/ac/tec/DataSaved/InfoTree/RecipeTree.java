@@ -1,14 +1,16 @@
 package cr.ac.tec.DataSaved.InfoTree;
 
 import cr.ac.tec.DataSaved.InAppData.Recipes.Recipe;
+import cr.ac.tec.DataStructures.LinkedList.List.DoubleList;
 import cr.ac.tec.DataStructures.Tree.AVLTree;
+import cr.ac.tec.DataStructures.Tree.BinaryTree;
 import cr.ac.tec.Files.JsonExchange;
 
 public class RecipeTree extends InfoTree<Recipe> {
     private static RecipeTree instance;
     public RecipeTree(){
-        Tree=new AVLTree<>();
-        route="C:\\Users\\Gabriel Solano\\Documents\\GitHub\\SegundoProyectoDatos1\\web\\Resources\\JsonFiles\\Recipe.json";
+        Tree=new BinaryTree<>();
+        route="C:\\Tecnologico de Costa Rica\\Tercer Semestre\\Algoritmos y estructuras\\COOKTIMEProyect\\web\\Resources\\JsonFiles\\Recipes.json";
         getData();
     }
     public static RecipeTree getInstance(){

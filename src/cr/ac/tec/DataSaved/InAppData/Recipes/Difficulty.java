@@ -2,7 +2,7 @@ package cr.ac.tec.DataSaved.InAppData.Recipes;
 
 import cr.ac.tec.DataStructures.LinkedList.Sorting.Numerable;
 
-public class Difficulty implements Numerable {
+public class Difficulty implements Numerable<Difficulty> {
     private int grade=0;
     public Difficulty(int number){
         setGrade(number);
@@ -33,7 +33,13 @@ public class Difficulty implements Numerable {
     }
 
     @Override
-    public int getInfo() {
+    public int getNumber() {
         return grade;
     }
+
+    @Override
+    public Difficulty[] getArray(int len) {
+        return new Difficulty[len];
+    }
+
 }

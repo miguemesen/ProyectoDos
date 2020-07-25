@@ -2,6 +2,8 @@ package cr.ac.tec.DataStructures.LinkedList.List;
 
 import cr.ac.tec.DataStructures.LinkedList.Nodes.DoubleNode;
 
+import java.util.ArrayList;
+
 public class DoubleList<T> implements List<T> {
 
     protected DoubleNode<T> head,tail;//The first and last node
@@ -277,6 +279,23 @@ public class DoubleList<T> implements List<T> {
      */
     public int getLength(){
         return length;
+    }
+    public void clear(){
+        this.head=this.tail=null;
+        this.length=0;
+    }
+    public void appendList(DoubleList<T> List){
+        if(List==null || List.getLength()<=0)return;
+        for(int i=0;i<List.getLength();i++){
+            AddTail(List.get(i));
+        }
+
+    }
+    public void appendArray(T[] array){
+        if(array==null || array.length<=0)return;
+        for(int i=0;i<array.length;i++){
+            AddTail(array[i]);
+        }
     }
 
 

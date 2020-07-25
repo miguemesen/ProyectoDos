@@ -26,8 +26,17 @@ public class MyMenu {
     public void setRecipes(ArrayList<Recipe> recipes){
         if(recipes==null)return;
         this.Recipes=new ArrayList<>();
-        for (int i=0;i<Recipes.size();i++){
+        for (int i=0;i<recipes.size();i++){
             this.Recipes.add(recipes.get(i).getID());
         }
+    }
+
+    @Override
+    public String toString() {
+        String res="";
+        for(int i=0;i<Recipes.size();i++){
+            res+=Integer.toString(Recipes.get(i));
+        }
+        return res;
     }
 }

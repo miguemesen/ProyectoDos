@@ -1,14 +1,11 @@
 package cr.ac.tec.DataSaved.InAppData.Recipes;
 import com.google.gson.annotations.Expose;
-import cr.ac.tec.DataSaved.ClientLogin.User;
 import cr.ac.tec.DataSaved.InAppData.Tags.RecipeTags.DietType;
 import cr.ac.tec.DataSaved.InAppData.Tags.RecipeTags.RecipeKind;
 import cr.ac.tec.DataSaved.InAppData.Tags.RecipeTags.RecipeRoll;
 import cr.ac.tec.DataSaved.InAppData.Tags.RecipeTags.RecipeTime;
 import cr.ac.tec.DataSaved.InAppData.Tags.Tagged;
-import cr.ac.tec.DataSaved.InfoTree.ChefTree;
 import cr.ac.tec.DataSaved.InfoTree.TreeConsultant;
-import cr.ac.tec.DataSaved.InfoTree.UserTree;
 import cr.ac.tec.DataSaved.Interfaces.RecipeOwners;
 import cr.ac.tec.DataStructures.LinkedList.List.Adapter.ArrayListAdapter;
 import cr.ac.tec.DataStructures.LinkedList.List.DoubleList;
@@ -18,7 +15,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 
-public class Recipe implements Tagged {
+public class Recipe implements Tagged<Recipe> {
     @Expose(serialize = false,deserialize = false)
     private final static int IDState=0;
     @Expose(serialize = false, deserialize = false)
@@ -38,7 +35,7 @@ public class Recipe implements Tagged {
     private ArrayList<String> Tags;
     private ArrayList<Comment> comments;
     private int grade; // Recipe Grade
-    private int reviewNumber;//Number of user who have reviewed the recipe
+    private int reviewNumber=0;//Number of user who have reviewed the recipe
     private String[] Steps;
     private String[] IngredientList;
     private Difficulty difficulty;
@@ -52,8 +49,8 @@ public class Recipe implements Tagged {
     }
     public void build(builder builder){
         if(builder==null)return;
+        builder.build();
         builder.fusing();
-        if(builder==null)return;
         this.grade=0;
         this.id=IdGiver;
         this.RecipeName=builder.RecipeName;
@@ -73,7 +70,6 @@ public class Recipe implements Tagged {
     public void setScore(int data){
         this.grade=data;
     }
-
     public Date getDate() {
         return date;
     }
@@ -171,6 +167,22 @@ public class Recipe implements Tagged {
         return new ArrayListAdapter<String>(Tags);
 
     }
+
+    @Override
+    public int getNumber() {
+        if(comparingState==IDState)return id;
+        if(comparingState==ScoreState)return grade;
+        if(comparingState==DifficultyState)return difficulty.getNumber();
+        return id;
+
+    }
+
+    @Override
+    public Recipe[] getArray(int len) {
+        return new Recipe[len];
+    }
+
+
     public class builder{
         private String RecipeName;
         private String Author;
@@ -191,13 +203,15 @@ public class Recipe implements Tagged {
         }
 
         public builder setAuthor(String author) {
-
             this.Author =author;
             return this;
         }
 
         public builder setRecipeKind(String recipeKind) {
-            this.recipeKind = RecipeKind.valueOf(recipeKind);
+            try {
+                this.recipeKind = RecipeKind.valueOf(recipeKind);
+            }
+            catch (EnumConstantNotPresentException e){}
             return this;
         }
 
@@ -212,7 +226,11 @@ public class Recipe implements Tagged {
         }
 
         public builder setRecipeRoll(String recipeRoll) {
-            this.recipeRoll = RecipeRoll.valueOf(recipeRoll);
+            try {
+                this.recipeRoll = RecipeRoll.valueOf(recipeRoll);
+            }
+            catch (EnumConstantNotPresentException e){}
+
             return this;
         }
 
@@ -225,7 +243,13 @@ public class Recipe implements Tagged {
             this.dietType = new DoubleList<>();
             if(diets!=null){
                 for(int i=0;i<diets.length;i++){
-                    dietType.AddTail(DietType.valueOf(diets[i]));
+                    try {
+                        dietType.AddTail(DietType.valueOf(diets[i]));
+                    }
+                    catch (EnumConstantNotPresentException e){
+
+                    }
+
                 }
             }
             return this;
@@ -251,11 +275,20 @@ public class Recipe implements Tagged {
             List.AddTail(recipeTime.toString());
             List.AddTail(recipeKind.toString());
             List.AddTail(recipeRoll.toString());
-           // List.AddTail(difficulty.toString());
             LinkedListTool<String> tool=new LinkedListTool<>();
             DoubleList<String> tempDiets=LinkedListTool.toStringList(dietType);
             List=tool.Merge(List,tempDiets);
             this.tags=tool.toJavaList(List);
+
+        }
+        public void build(){
+            if(RecipeName==null)RecipeName="";
+            if( Author==null)Author="";
+            if(difficulty==null) difficulty=new Difficulty(0);
+            if (dietType==null)dietType=new DoubleList<>();
+            if(IngredientList==null) IngredientList=new String[0];
+            if(Steps==null)Steps =new String[0];
+
         }
 
     }

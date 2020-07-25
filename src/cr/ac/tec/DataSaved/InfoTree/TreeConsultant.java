@@ -92,6 +92,7 @@ public class TreeConsultant {
 
     }
     public static ArrayList<Recipe> getRecipesFromID(ArrayList<Integer> IDList){
+        initializer();
         ArrayList<Recipe> recipes=new ArrayList<>();
         if(IDList==null)return recipes;
         Recipe temp;

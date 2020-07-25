@@ -14,9 +14,12 @@ public class MyMenuManager {
     private final static QuickSort<Recipe> QUICK_SORT=new QuickSort<>();
     private final static InsertionDouble<Recipe> Insertion_Sort=new InsertionDouble<>();
     private final static BubbleSortDouble<Recipe> Bubble_Sort= new BubbleSortDouble<>();
-   // private final static RadixSort<Recipe> RADIX_SORT=new RadixSort();
+   private final static RadixSort<Recipe> RADIX_SORT=new RadixSort();
     public static void sortByDate(RecipeOwners user){
         DoubleList<Recipe> recipe=Verification(user);
+        for (int i=0;i<recipe.getLength();i++){
+            System.out.println(recipe.get(i).toString());
+        }
         setComparingState(Date,recipe);
         if(recipe==null)return;
         user.setRecipe(getSortedMyMenu(recipe,Bubble_Sort));
@@ -32,8 +35,34 @@ public class MyMenuManager {
 
     }
     public static void sortByDifficulty(RecipeOwners user){
-        //falta radix sort
+        DoubleList<Recipe> rec=Verification(user);
+        setComparingState(Difficulty,rec);
+        if(rec==null)return;
+        user.setRecipe(getSortedMyMenu(rec,RADIX_SORT));
+        setComparingState(ID,rec);
 
+    }
+    public static void sorting(RecipeOwners user,int ComparingState){
+        DoubleList<Recipe> recipe=Verification(user);
+        if(recipe==null || recipe.getLength()<=1)return;
+        setComparingState(ComparingState,recipe);
+        Sorting<Recipe> sorting;
+        switch (ComparingState){
+            case Score:
+                sorting=QUICK_SORT;
+                break;
+            case Date:
+                sorting=Bubble_Sort;
+                break;
+            case Difficulty:
+                sorting=RADIX_SORT;
+                break;
+            default:
+                sorting=Insertion_Sort;
+                break;
+        }
+        user.setRecipe(getSortedMyMenu(recipe,sorting));
+        setComparingState(ID,recipe);
     }
     public static DoubleList<Recipe> Verification(RecipeOwners user){
         if(user==null)return null;

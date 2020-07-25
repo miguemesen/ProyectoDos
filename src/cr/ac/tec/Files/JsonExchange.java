@@ -1,12 +1,14 @@
 package cr.ac.tec.Files;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.JsonParser;
 import com.google.gson.JsonSyntaxException;
 import cr.ac.tec.DataStructures.Tree.BinaryTree;
 
 public class JsonExchange {
-    private static  Gson gson=new Gson();
+    private static Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ").create();
+    //private static  Gson gson=new Gson();
     private static JsonParser parser=new JsonParser();
     public static Object getObjectFromJson(String route, Class cl){
         try {
@@ -17,7 +19,9 @@ public class JsonExchange {
             return o;
         }
         catch (Exception exception){
+            System.out.println("Llegue a una excepcion");
             System.out.println(exception.getMessage());
+            System.out.println( exception.getCause().toString());
             return null;
         }
     }
