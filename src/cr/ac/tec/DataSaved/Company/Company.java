@@ -10,16 +10,15 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 public class Company extends RecipeOwners {
-    private ProfileCompany profileCompany;
-    private String CompanyName;// it unique
+    private String CompanyName;//Its unique
     private Schedule schedule;
-    private  ArrayList<User> Members;
-    public Company(String name, double Init, double End,String... days){
+    private ProfileCompany profileCompany;
+    private  ArrayList<String> Members;
+    public Company(String name, int  IH, int IM,int FH,int FM,String... days){
         this.CompanyName=name;
         Schedule.Builder builder=new Schedule.Builder();
         builder.AddDays(days);
-        builder.End(End);
-        builder.Init(Init);
+        builder.setLapse(IH,IM,FH,FM);
         this.schedule=new Schedule(builder);
         this.profileCompany=new ProfileCompany(new MyMenu());
         Members= new ArrayList<>();
@@ -30,7 +29,7 @@ public class Company extends RecipeOwners {
     public void addMember(User...users){
         if(users==null)return;
         for(int i=0;i<users.length;i++){
-            Members.add(users[i]);
+            Members.add(users[i].toString());
         }
     }
     @Override

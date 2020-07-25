@@ -4,21 +4,19 @@ import java.time.DayOfWeek;
 import java.util.ArrayList;
 public class Schedule {
     private ArrayList<DayOfWeek>Days;
-    private double InitTime;
-    private double FinalTime;
+    private Lapse lapse;
     public Schedule(Builder builder){
         if(builder==null)return;
         builder.build();
         this.Days=builder.Days;
+        this.lapse=builder.lapse;
     }
     public static class Builder{
         private ArrayList<DayOfWeek> Days;
-        private double InitTime;
-        private double FinalTime;
+        private Lapse lapse;
         {
             Days=new ArrayList<>();
-            InitTime=8.0;
-            FinalTime=17.30;
+            lapse=new Lapse();
         }
         public Builder AddDays(String...days){
             if(Days==null)return this;
@@ -33,25 +31,14 @@ public class Schedule {
             }
             return this;
         }
-        public Builder Init(double Init){
-            if(Init>=0 ^ Init<24){
-                InitTime=Init;
-            }
-            return this;
-        }
-        public Builder End(double End){
-            if(End>=0 && End<24){
-                this.FinalTime=End;
-            }
+        public Builder setLapse(int IH,int IM,int FH,int FM){
+            this.lapse=new Lapse(IH,IM,FH,FM);
             return this;
         }
         public void build(){
-            if(InitTime>FinalTime){
-                double temp=InitTime;
-                InitTime=FinalTime;
-                FinalTime=temp;
-            }
+
         }
+
 
 
     }

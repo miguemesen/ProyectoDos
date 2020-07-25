@@ -2,7 +2,9 @@ package cr.ac.tec;
 
 import com.google.gson.Gson;
 import cr.ac.tec.DataSaved.ClientLogin.User;
+import cr.ac.tec.DataSaved.Company.Company;
 import cr.ac.tec.DataSaved.InAppData.Recipes.*;
+import cr.ac.tec.DataSaved.InfoTree.CompanyTree;
 import cr.ac.tec.DataSaved.InfoTree.RecipeTree;
 import cr.ac.tec.Files.JsonExchange;
 
@@ -23,6 +25,10 @@ public class Main2 {
         User[] users=new User[2];
         users[0]=user;
         users[1]=user1;
+        Company company=new Company("Google",8,30,5,30);
+        company.addMember(users);
+        CompanyTree companyTree=CompanyTree.getInstance();
+        companyTree.attach(company);
         String printing=gson.toJson(users);
        // System.out.println(printing);
 

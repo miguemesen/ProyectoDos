@@ -7,7 +7,7 @@ import cr.ac.tec.Files.JsonExchange;
 public class CompanyTree extends InfoTree<Company> {
     private static CompanyTree instance;
     private CompanyTree(){
-        route="C:\\Tecnologico de Costa Rica\\Tercer Semestre\\Algoritmos y estructuras\\COOKTIMEProyect\\web\\Resources\\JsonFiles\\CompanyTree.json";
+        route="C:\\Tecnologico de Costa Rica\\Tercer Semestre\\Algoritmos y estructuras\\COOKTIMEProyect\\web\\Resources\\JsonFiles\\Companies.json";
         Tree=new SplayTree();
         this.getData();
     }
@@ -18,7 +18,6 @@ public class CompanyTree extends InfoTree<Company> {
                     instance=new CompanyTree();//Some duplicated code to avoid the threat handler every call, its just used on the first one, before having created and instance
                 }
             }
-
         }
         return instance;
     }

@@ -14,8 +14,8 @@ public class ProfileUser extends ProfileStructure {
        this.myMenu=myMenu;
        this.companies=new ArrayList<>();
    }
-   public void AddCompany(String name, double init, double end,String[] days,User... user){
-       Company company=new Company(name,init,end,days);
+   public void AddCompany(String name, int IH,int IM,int FH,int FM,String[] days,User... user){
+       Company company=new Company(name,IH,IM,FH,FM,days);
        company.addMember(user);
    }
 
