@@ -38,7 +38,7 @@ public class Recipe implements Tagged<Recipe> {
     private int reviewNumber=0;//Number of user who have reviewed the recipe
     private String[] Steps;
     private String[] IngredientList;
-    private Difficulty difficulty;
+    private int difficulty;
     private Date date;
     private int comparingState=0;
     public Recipe(){
@@ -128,7 +128,9 @@ public class Recipe implements Tagged<Recipe> {
     private int compareByDifficulty(Recipe otherRecipe){
         if(otherRecipe==null)return 1;
         if(otherRecipe==this)return 0;
-        return difficulty.compareTo(difficulty);
+        if(difficulty>otherRecipe.difficulty)return 1;
+        if(difficulty<otherRecipe.difficulty)return -1;
+        return 0;
     }
     public void setComparingState(int data){
         if(data<IDState || data>DifficultyState)return;
@@ -177,7 +179,7 @@ public class Recipe implements Tagged<Recipe> {
     public int getNumber() {
         if(comparingState==IDState)return id;
         if(comparingState==ScoreState)return (int) grade;
-        if(comparingState==DifficultyState)return difficulty.getNumber();
+        if(comparingState==DifficultyState)return difficulty;
         return id;
 
     }
@@ -195,7 +197,7 @@ public class Recipe implements Tagged<Recipe> {
         private RecipeKind recipeKind;
         private RecipeTime recipeTime;
         private RecipeRoll recipeRoll;
-        private Difficulty difficulty;
+        private int difficulty;
         private DoubleList<DietType> dietType;
         private String[] IngredientList;
         private String[] Steps;
@@ -239,7 +241,7 @@ public class Recipe implements Tagged<Recipe> {
             return this;
         }
 
-        public builder setDifficulty(Difficulty difficulty) {
+        public builder setDifficulty(int difficulty) {
             this.difficulty = difficulty;
             return this;
         }
@@ -289,7 +291,6 @@ public class Recipe implements Tagged<Recipe> {
         public void build(){
             if(RecipeName==null)RecipeName="";
             if( Author==null)Author="";
-            if(difficulty==null) difficulty=new Difficulty(0);
             if (dietType==null)dietType=new DoubleList<>();
             if(IngredientList==null) IngredientList=new String[0];
             if(Steps==null)Steps =new String[0];

@@ -45,7 +45,7 @@ public class RecipeForm extends HttpServlet {
                 .setDietType(DietTypes)
                 .setRecipeName(RecipeName)
                 .setRecipeName(RecipeName)
-                .setDifficulty(new Difficulty(difficulty))
+                .setDifficulty(difficulty)
                 .setAuthor(UserName)
         );
         TreeConsultant.RecipeOwner(UserName).addRecipe(recipe);

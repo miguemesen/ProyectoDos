@@ -13,7 +13,7 @@ import java.io.FileWriter;
 public class Main2 {
     public static void main(String[] args){
         Recipe recipe=new Recipe();
-        Recipe.builder builder=recipe.new builder().setRecipeKind("Lunch").setDietType("Vegetarian").setRecipeName("Rice and beans").setAuthor("TitoDiaz").setIngredientList("beans","rice","steak").setAmount(44).setDifficulty(new Difficulty(50)).setPortions(4).setRecipeRoll("WarmDrink").setRecipeTime("LongTime").setSteps("Bata los huevos");
+        Recipe.builder builder=recipe.new builder().setRecipeKind("Lunch").setDietType("Vegetarian").setRecipeName("Rice and beans").setAuthor("TitoDiaz").setIngredientList("beans","rice","steak").setAmount(44).setDifficulty(50).setPortions(4).setRecipeRoll("WarmDrink").setRecipeTime("LongTime").setSteps("Bata los huevos");
         recipe.build(builder);
         RecipeTree recipeTree=RecipeTree.getInstance();
         recipeTree.attach(recipe);
