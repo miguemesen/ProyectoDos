@@ -21,19 +21,31 @@ public class RecipeForm extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
         String UserName=req.getParameter("Author");
         String RecipeName=req.getParameter("RecipeName");
         String RecipeKind=req.getParameter("RecipeKind");
         String RecipeRoll=req.getParameter("RecipeRoll");
         String RecipeTime=req.getParameter("RecipeTime");
         String dietTypes=req.getParameter("DietType");
-        String[] DietTypes=dietTypes.split("%");
+        System.out.println("DIETA"+dietTypes);
+        System.out.println("Recipe kind"+ RecipeKind);
+        System.out.println("reciperoll"+RecipeRoll);
+        System.out.println("recipeTime"+RecipeTime);
+
+        String[] DietTypes=dietTypes.split("/");
+
+        for(int i=0;i<DietTypes.length;i++){
+
+            System.out.println("Slau2:"+DietTypes[i]);
+        }
         String steps=req.getParameter("Steps");
-        String[] Steps=steps.split("%");
+        String[] Steps=steps.split("/");
         String ingredients=req.getParameter("Ingredients");
-        String[] Ingredients=ingredients.split("%");
+        String[] Ingredients=ingredients.split("/");
         int amount=Integer.parseInt(req.getParameter("Amount"));
         int difficulty=Integer.parseInt(req.getParameter("Difficulty"));
+
         Recipe recipe=new Recipe();
         recipe.build(recipe.new builder()
                 .setSteps(Steps)
