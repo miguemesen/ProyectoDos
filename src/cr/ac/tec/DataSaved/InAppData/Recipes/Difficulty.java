@@ -1,6 +1,8 @@
 package cr.ac.tec.DataSaved.InAppData.Recipes;
 
-public class Difficulty implements Comparable {
+import cr.ac.tec.DataStructures.LinkedList.Sorting.Numerable;
+
+public class Difficulty implements Numerable {
     private int grade=0;
     public Difficulty(int number){
         setGrade(number);
@@ -28,5 +30,10 @@ public class Difficulty implements Comparable {
        if(grade>difficulty.grade)return 1;
        return -1;
 
+    }
+
+    @Override
+    public int getInfo() {
+        return grade;
     }
 }

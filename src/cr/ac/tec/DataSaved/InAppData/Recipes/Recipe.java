@@ -36,6 +36,7 @@ public class Recipe implements Tagged {
     private int portions; //price
     private int amount;
     private ArrayList<String> Tags;
+    private ArrayList<Comment> comments;
     private int grade; // Recipe Grade
     private int reviewNumber;//Number of user who have reviewed the recipe
     private String[] Steps;
@@ -66,6 +67,7 @@ public class Recipe implements Tagged {
         this.date=new Date();
         this.reviewNumber=0;
         this.subscribers=new ArrayList<>();
+        this.comments=new ArrayList<>();
         IdGiver++;
     }
     public void setScore(int data){
@@ -77,6 +79,12 @@ public class Recipe implements Tagged {
     }
     public int getID(){
         return id;
+    }
+    public void addComment(RecipeOwners recipeOwners,String text){
+        comments.add(new Comment(recipeOwners.toString(),text));
+    }
+    public ArrayList<Comment> getComments(){
+        return comments;
     }
 
     @Override

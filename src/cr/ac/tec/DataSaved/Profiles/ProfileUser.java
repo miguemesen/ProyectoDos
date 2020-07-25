@@ -8,15 +8,17 @@ import java.util.ArrayList;
 
 public class ProfileUser extends ProfileStructure {
 
-   private ArrayList<Company> companies;
+   private ArrayList<String> companies;
 
    public ProfileUser(MyMenu myMenu){
        this.myMenu=myMenu;
        this.companies=new ArrayList<>();
    }
-   public void AddCompany(String name, int IH,int IM,int FH,int FM,String[] days,User... user){
-       Company company=new Company(name,IH,IM,FH,FM,days);
-       company.addMember(user);
+
+   public void AddCompany(Company company){
+       if(company==null)return;
+       companies.add(company.toString());
+
    }
 
 

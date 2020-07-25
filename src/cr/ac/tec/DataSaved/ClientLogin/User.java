@@ -1,6 +1,7 @@
 package cr.ac.tec.DataSaved.ClientLogin;
 
 
+import cr.ac.tec.DataSaved.Company.Company;
 import cr.ac.tec.DataSaved.InAppData.Recipes.MyMenu.MyMenu;
 import cr.ac.tec.DataSaved.InAppData.Recipes.Recipe;
 import cr.ac.tec.DataSaved.Interfaces.RecipeOwners;
@@ -9,6 +10,7 @@ import cr.ac.tec.DataSaved.Profiles.ProfileUser;
 import java.util.ArrayList;
 
 public class User extends RecipeOwners {
+    private String UserKind;
     protected String FirstName;
     protected String LastName;
     protected String UserName;//Email
@@ -24,10 +26,14 @@ public class User extends RecipeOwners {
         this.LastName=LastName;
         this.FirstName=FirstName;
         MyMenu myMenu=new MyMenu();
+        this.UserKind="Default";
        this.profileStructure=new ProfileUser(myMenu);
     }
     public User(String UserName,String password){
         this(UserName,password,"","",0);//generics parameters
+    }
+    public User(String UserName){
+        this(UserName,"");
     }
     public void setPassword(String password) {
         this.password = password;
@@ -90,6 +96,9 @@ public class User extends RecipeOwners {
     @Override
     public String getIdentifier() {
         return UserName;
+    }
+    public void AddCompany(Company company){
+        this.profileStructure.AddCompany(company);
     }
 
     @Override
