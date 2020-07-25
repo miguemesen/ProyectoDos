@@ -10,7 +10,7 @@ import cr.ac.tec.DataSaved.Profiles.ProfileUser;
 import java.util.ArrayList;
 
 public class User extends RecipeOwners {
-    private String UserKind;
+    protected String UserKind;
     protected String FirstName;
     protected String LastName;
     protected String UserName;//Email

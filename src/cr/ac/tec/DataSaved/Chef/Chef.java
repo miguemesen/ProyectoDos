@@ -4,11 +4,12 @@ import cr.ac.tec.DataSaved.ClientLogin.User;
 import cr.ac.tec.DataSaved.InfoTree.UserTree;
 
 public class Chef extends User {
-    private int grade;
+    private double grade;
     private int reactionsNumber;
 
     private Chef(User user){
         super(user.getUserName(),user.getPassword(),user.getFirstName(),user.getLastName(),user.getAge());
+        UserKind="Chef";
         grade=0;
         reactionsNumber=0;
     }
@@ -18,6 +19,7 @@ public class Chef extends User {
         if(!userTree.IsMember(user))return null;
         return new Chef(user);
     }
+
 
     @Override
     public boolean equals(Object o) {
