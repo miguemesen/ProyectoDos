@@ -26,9 +26,9 @@ public class RecipeForm extends HttpServlet {
         String RecipeKind=req.getParameter("RecipeKind");
         String RecipeRoll=req.getParameter("RecipeRoll");
         String RecipeTime=req.getParameter("RecipeTime");
-        String[] DietTypes=req.getParameterValues("DietType");
-        String[] Steps=req.getParameterValues("Steps");
-        String[] Ingredients=req.getParameterValues("Ingredients");
+        String[] DietTypes=req.getParameterValues("DietType[]");
+        String[] Steps=req.getParameterValues("Steps[]");
+        String[] Ingredients=req.getParameterValues("Ingredients[]");
         int amount=Integer.parseInt(req.getParameter("Amount"));
         int difficulty=Integer.parseInt(req.getParameter("Difficulty"));
         Recipe recipe=new Recipe();
