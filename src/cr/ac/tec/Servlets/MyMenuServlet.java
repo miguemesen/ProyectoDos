@@ -23,20 +23,23 @@ public class MyMenuServlet extends HttpServlet {
     private static final int DifficultyState=3;
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        PrintWriter writer = resp.getWriter();
+        int sortState = Integer.parseInt(req.getParameter("SortState"));
+        String UserName = req.getParameter("UserName");
+        UserName="a";
+        sortState=1;
+        User user = UserTree.getInstance().getMember(new User(UserName));
+        MyMenuManager.sorting(user, sortState);
+        MyMenu myMenu = user.getMyMenu();
+        ArrayList<Recipe> arrayList = myMenu.getRecipes();
+        String send = JsonExchange.getStringFromObject(arrayList);
+        writer.print(send);
         Runnable runnable=new Runnable() {
             @Override
             public void run() {
                 synchronized (this) {
                     try {
-                        PrintWriter writer = resp.getWriter();
-                        int sortState = Integer.parseInt(req.getParameter("SortState"));
-                        String UserName = req.getParameter("UserName");
-                        User user = UserTree.getInstance().getMember(new User(UserName));
-                        MyMenuManager.sorting(user, sortState);
-                        MyMenu myMenu = user.getMyMenu();
-                        ArrayList<Recipe> arrayList = myMenu.getRecipes();
-                        String send = JsonExchange.getStringFromObject(arrayList);
-                        writer.print(send);
+
 
                     } catch (Exception e) {
                     }

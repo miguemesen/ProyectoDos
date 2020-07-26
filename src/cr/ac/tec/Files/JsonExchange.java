@@ -7,7 +7,7 @@ import com.google.gson.JsonSyntaxException;
 import cr.ac.tec.DataStructures.Tree.BinaryTree;
 
 public class JsonExchange {
-    private static Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ").create();
+    private static Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
     //private static  Gson gson=new Gson();
     private static JsonParser parser=new JsonParser();
     public static Object getObjectFromJson(String route, Class cl){

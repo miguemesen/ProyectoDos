@@ -13,8 +13,8 @@ public class RecipeTree extends InfoTree<Recipe> {
     private String IndexRoute;
     public RecipeTree(){
         Tree=new BinaryTree<>();
-        route="C:\\Tecnologico de Costa Rica\\Tercer Semestre\\Algoritmos y estructuras\\COOKTIMEProyect\\web\\Resources\\JsonFiles\\Recipes.json";
-        IndexRoute="C:\\Tecnologico de Costa Rica\\Tercer Semestre\\Algoritmos y estructuras\\COOKTIMEProyect\\web\\Resources\\JsonFiles\\RecipeID.txt";
+        route="C:\\Users\\migue\\OneDrive\\Documentos\\Proyecto2\\SegundoProyectoDatos1\\web\\Resources\\JsonFiles\\Recipes.json";
+        IndexRoute="C:\\Users\\migue\\OneDrive\\Documentos\\Proyecto2\\SegundoProyectoDatos1\\web\\Resources\\JsonFiles\\RecipeID.txt";
         Recipe.setIdGiver(PlainText.readNumber(IndexRoute));
         getData();
     }

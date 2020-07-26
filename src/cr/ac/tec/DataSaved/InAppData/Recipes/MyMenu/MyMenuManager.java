@@ -44,6 +44,7 @@ public class MyMenuManager {
     }
     public static void sorting(RecipeOwners user,int ComparingState){
         DoubleList<Recipe> recipe=Verification(user);
+        System.out.println(recipe+"PRIMERO");
         if(recipe==null || recipe.getLength()<=1)return;
         setComparingState(ComparingState,recipe);
         Sorting<Recipe> sorting;
@@ -62,6 +63,7 @@ public class MyMenuManager {
                 break;
         }
         user.setRecipe(getSortedMyMenu(recipe,sorting));
+        System.out.println(getSortedMyMenu(recipe,sorting)+"SEGUNDO");
         setComparingState(ID,recipe);
     }
     public static DoubleList<Recipe> Verification(RecipeOwners user){
@@ -72,9 +74,12 @@ public class MyMenuManager {
         return recipeManager.tDoubleList(recipes);
     }
     public  static ArrayList<Recipe> getSortedMyMenu(DoubleList<Recipe> myMenu, Sorting<Recipe> sorting){
+        System.out.println(myMenu+"TERCERO");
         if(myMenu==null || sorting==null)return null;
         sorting.setList(myMenu);
+
         sorting.sort();
+        System.out.println(recipeManager.toJavaList(myMenu)+"CUARTO");
         return recipeManager.toJavaList(myMenu);
     }
     public  static void setComparingState(int state,DoubleList<Recipe> myMenu){

@@ -8,7 +8,7 @@ public class ChefTree extends InfoTree<Chef> {
     private static ChefTree instance;
 
     private ChefTree(){
-        route="C:\\Users\\migue\\OneDrive\\Escritorio\\SegundoProyectoDatos1\\web\\Resources\\JsonFiles\\Chefs.json";
+        route="C:\\Users\\migue\\OneDrive\\Documentos\\Proyecto2\\SegundoProyectoDatos1\\web\\Resources\\JsonFiles\\Chefs.json";
         Tree=new BinaryTree<>();
         getData();
     }

@@ -96,6 +96,10 @@ public class TreeConsultant {
 
     }
     public static ArrayList<Recipe> getRecipesFromID(ArrayList<Integer> IDList){
+        System.out.println("QUINTO");
+        for(int i=0; i< IDList.size();i++){
+            System.out.println(IDList.get(i));
+        }
         initializer();
         ArrayList<Recipe> recipes=new ArrayList<>();
         if(IDList==null)return recipes;
@@ -103,8 +107,13 @@ public class TreeConsultant {
         for(int i=0;i<IDList.size();i++){
             temp=getRecipesFromID(IDList.get(i));
             if(temp!=null){
+                System.out.println(temp+"SETIMO");
                 recipes.add(temp);
             }
+        }
+        System.out.println("QSEXTO");
+        for(int i=0; i< recipes.size();i++){
+            System.out.println(recipes.get(i));
         }
         return recipes;
 
