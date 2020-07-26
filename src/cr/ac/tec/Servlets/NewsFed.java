@@ -19,6 +19,7 @@ public class NewsFed extends HttpServlet {
                     try {
                         String UserName=req.getParameter(UserNames);
                         resp.getWriter().print(cr.ac.tec.DataSaved.NewsFed.NewsFed.getNewsFed(UserName));
+                        System.out.println(cr.ac.tec.DataSaved.NewsFed.NewsFed.getNewsFed(UserName));
                     }
                     catch (Exception e){}
                 }
