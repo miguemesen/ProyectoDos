@@ -138,6 +138,15 @@ public class TreeConsultant {
         return recipeLinkedListTool.toJavaList(recipeSet);
 
     }
+    public static ArrayList<Company> getCompanies(String data){
+        if(data==null)return null;
+        initializer();
+        TextFinder<Company> matching=new TextFinder<>();
+       Set<Company> companies =matching.matching(companyTree.getList(),data);
+       LinkedListTool<Company> tool=new LinkedListTool<>();
+       return tool.toJavaList(companies);
+
+    }
 
 
 
