@@ -22,11 +22,25 @@ public class getSearch extends HttpServlet {
     private final String divider="/";
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String source=req.getParameter(via);
-        String text=req.getParameter(Keyword);
-        String tags=req.getParameter(Tags);
-        String[] TheTags=tags.split(divider);
-        resp.getWriter().print(getReturn(via,text,TheTags));
+        Runnable runnable=new Runnable() {
+            @Override
+            public void run() {
+                synchronized (this) {
+                    try {
+                        String source = req.getParameter(via);
+                        String text = req.getParameter(Keyword);
+                        String tags = req.getParameter(Tags);
+                        String[] TheTags = tags.split(divider);
+                        resp.getWriter().print(getReturn(via, text, TheTags));
+
+                    } catch (Exception e) {
+                    }
+                }
+            }
+        };
+        Thread thread=new Thread(runnable);
+        thread.run();
+
 
     }
 

@@ -9,10 +9,24 @@ import java.io.IOException;
 
 @WebServlet(value = "/NewsFed", name = "NewsFed")
 public class NewsFed extends HttpServlet {
+    private String UserNames="UserName";
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String UserName=req.getParameter("UserName");
-        resp.getWriter().print(cr.ac.tec.DataSaved.NewsFed.NewsFed.getNewsFed(UserName));
+        Runnable runnable=new Runnable() {
+            @Override
+            public void run() {
+                synchronized (this){
+                    try {
+                        String UserName=req.getParameter(UserNames);
+                        resp.getWriter().print(cr.ac.tec.DataSaved.NewsFed.NewsFed.getNewsFed(UserName));
+                    }
+                    catch (Exception e){}
+                }
+            }
+        };
+        Thread thread=new Thread(runnable);
+        thread.run();
+
     }
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

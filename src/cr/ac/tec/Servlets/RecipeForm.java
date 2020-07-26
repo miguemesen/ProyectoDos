@@ -15,6 +15,18 @@ import java.io.IOException;
 
 @WebServlet(name = "RecipeForm",value = "/RecipeGetter")
 public class RecipeForm extends HttpServlet {
+    private String Author="Author";
+    private String RecipeName="RecipeName";
+    private String RecipeRoll="RecipeRoll";
+    private String RecipeKind="RecipeKind";
+    private String RecipeTime="RecipeTime";
+    private String DietType="DietType";
+    private String divisor="/";
+    private String portions="portions";
+    private String Steps="Steps";
+    private String Ingredients="Ingredients";
+    private String Amount="Amount";
+    private String Difficulty="Difficulty";
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         doPost(req, resp);
@@ -22,30 +34,25 @@ public class RecipeForm extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-        String UserName=req.getParameter("Author");
-        String RecipeName=req.getParameter("RecipeName");
-        String RecipeKind=req.getParameter("RecipeKind");
-        String RecipeRoll=req.getParameter("RecipeRoll");
-        String RecipeTime=req.getParameter("RecipeTime");
-        String dietTypes=req.getParameter("DietType");
-        System.out.println("DIETA"+dietTypes);
-        System.out.println("Recipe kind"+ RecipeKind);
-        System.out.println("reciperoll"+RecipeRoll);
-        System.out.println("recipeTime"+RecipeTime);
-
-        String[] DietTypes=dietTypes.split("/");
+        String UserName=req.getParameter(this.Author);
+        String RecipeName=req.getParameter(this.RecipeName);
+        String RecipeKind=req.getParameter(this.RecipeKind);
+        String RecipeRoll=req.getParameter(this.RecipeRoll);
+        String RecipeTime=req.getParameter(this.RecipeTime);
+        String dietTypes=req.getParameter(this.DietType);
+        int Portion=Integer.parseInt(req.getParameter(portions));
+        String[] DietTypes=dietTypes.split(divisor);
 
         for(int i=0;i<DietTypes.length;i++){
 
             System.out.println("Slau2:"+DietTypes[i]);
         }
-        String steps=req.getParameter("Steps");
-        String[] Steps=steps.split("/");
-        String ingredients=req.getParameter("Ingredients");
-        String[] Ingredients=ingredients.split("/");
-        int amount=Integer.parseInt(req.getParameter("Amount"));
-        int difficulty=Integer.parseInt(req.getParameter("Difficulty"));
+        String steps=req.getParameter(this.Steps);
+        String[] Steps=steps.split(this.divisor);
+        String ingredients=req.getParameter(this.Ingredients);
+        String[] Ingredients=ingredients.split(this.divisor);
+        int amount=Integer.parseInt(req.getParameter(this.Amount));
+        int difficulty=Integer.parseInt(req.getParameter(this.Difficulty));
 
         Recipe recipe=new Recipe();
         recipe.build(recipe.new builder()
@@ -60,12 +67,12 @@ public class RecipeForm extends HttpServlet {
                 .setRecipeName(RecipeName)
                 .setDifficulty(difficulty)
                 .setAuthor(UserName)
+                .setPortions(Portion)
         );
         TreeConsultant.RecipeOwner(UserName).addRecipe(recipe);
         RecipeTree recipeTree=new RecipeTree();
         recipeTree.attach(recipe);
         UserTree.getInstance().updateFile();
-        resp.getWriter().print("HolaHOLA");
 
     }
 }
