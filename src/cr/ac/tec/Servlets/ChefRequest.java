@@ -9,6 +9,7 @@ import java.io.IOException;
 
 @WebServlet(value = "/hohoho", name = "")
 public class ChefRequest extends HttpServlet {
+    String User="UserName";
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String UserName;

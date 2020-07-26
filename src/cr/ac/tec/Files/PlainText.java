@@ -36,5 +36,13 @@ public class PlainText {
             System.out.println(e.getMessage());
         }
     }
+    public static int readNumber(String route){
+        try {
+            return Integer.parseInt(readFile(route));
+        }
+        catch (Exception e){
+            return 0;
+        }
+    }
 
 }

@@ -15,6 +15,12 @@ import java.io.PrintWriter;
 
 @WebServlet(name = "CompanyForm" , value = "/Company")
 public class CompanyForm extends HttpServlet {
+    private String CompanyNames="CompanyName";
+    private String IHS="InitHour";
+    private String IMS="InitMinute";
+    private String FHS="FinalHour";
+    private String FMS="FinalMinute";
+    private String UserName="UserName";
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Runnable runnable=new Runnable() {
@@ -22,12 +28,12 @@ public class CompanyForm extends HttpServlet {
             public void run() {
                 try {
                     PrintWriter printWriter=resp.getWriter();
-                    String CompanyName=req.getParameter("CompanyName");
-                    int IH=Integer.parseInt(req.getParameter("InitHour"));
-                    int IM=Integer.parseInt(req.getParameter("InitMinute"));
-                    int FH=Integer.parseInt(req.getParameter("FinalHour"));
-                    int FM=Integer.parseInt(req.getParameter("FinalMinute"));
-                    String User=req.getParameter("UserName");
+                    String CompanyName=req.getParameter(CompanyNames);
+                    int IH=Integer.parseInt(req.getParameter(IHS));
+                    int IM=Integer.parseInt(req.getParameter(IMS));
+                    int FH=Integer.parseInt(req.getParameter(FHS));
+                    int FM=Integer.parseInt(req.getParameter(FMS));
+                    String User=req.getParameter(UserName);
                     User user= UserTree.getInstance().getMember(new User(User));
                     if(user!=null){
                         Company company=new Company(CompanyName,IH,IM,FH,FM);

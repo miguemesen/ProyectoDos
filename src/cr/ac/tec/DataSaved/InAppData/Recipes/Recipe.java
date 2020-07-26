@@ -197,6 +197,13 @@ public class Recipe implements Tagged<Recipe> {
         return new Recipe[len];
     }
 
+    public static void setIdGiver(int IDGiver){
+        IDGiver=IDGiver;
+    }
+    public static int getIdGiver(){
+        return IdGiver;
+    }
+
 
     public class builder{
         private String RecipeName;
@@ -230,17 +237,14 @@ public class Recipe implements Tagged<Recipe> {
             catch (EnumConstantNotPresentException e){}
             return this;
         }
-
         public builder setPortions(int portions) {
             this.portions = portions;
             return this;
         }
-
         public builder setRecipeTime(String recipeTime) {
             this.recipeTime = RecipeTime.valueOf(recipeTime);
             return this;
         }
-
         public builder setRecipeRoll(String recipeRoll) {
             try {
                 this.recipeRoll = RecipeRoll.valueOf(recipeRoll);

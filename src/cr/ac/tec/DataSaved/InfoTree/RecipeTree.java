@@ -5,12 +5,17 @@ import cr.ac.tec.DataStructures.LinkedList.List.DoubleList;
 import cr.ac.tec.DataStructures.Tree.AVLTree;
 import cr.ac.tec.DataStructures.Tree.BinaryTree;
 import cr.ac.tec.Files.JsonExchange;
+import cr.ac.tec.Files.PlainText;
+
 
 public class RecipeTree extends InfoTree<Recipe> {
     private static RecipeTree instance;
+    private String IndexRoute;
     public RecipeTree(){
         Tree=new BinaryTree<>();
         route="C:\\Tecnologico de Costa Rica\\Tercer Semestre\\Algoritmos y estructuras\\COOKTIMEProyect\\web\\Resources\\JsonFiles\\Recipes.json";
+        IndexRoute="C:\\Tecnologico de Costa Rica\\Tercer Semestre\\Algoritmos y estructuras\\COOKTIMEProyect\\web\\Resources\\JsonFiles\\RecipeID.txt";
+        Recipe.setIdGiver(PlainText.readNumber(IndexRoute));
         getData();
     }
     public static RecipeTree getInstance(){
@@ -28,5 +33,12 @@ public class RecipeTree extends InfoTree<Recipe> {
         Recipe[] recipes=(Recipe[]) JsonExchange.getObjectFromJson(route,Recipe[].class);
         Tree.append(recipes);
 
+    }
+
+    @Override
+    public boolean attach(Recipe info) {
+        boolean condition= super.attach(info);
+        PlainText.writeFile(IndexRoute,String.valueOf(Recipe.getIdGiver()));
+        return condition;
     }
 }

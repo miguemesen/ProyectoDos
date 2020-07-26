@@ -147,6 +147,17 @@ public class TreeConsultant {
        return tool.toJavaList(companies);
 
     }
+    public static Company getCompanyFromName(String name){
+        if(name==null)return null;
+        initializer();
+        Company company=new Company(name);
+        return companyTree.getMember(company);
+    }
+    public static User getUserFromName(String name){
+        if(name==null)return null;
+        User user=new User(name);
+        return userTree.getMember(user);
+    }
 
 
 
