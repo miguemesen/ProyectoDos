@@ -34,12 +34,16 @@ public class Recipe implements Tagged<Recipe> {
     private int amount;
     private ArrayList<String> Tags;
     private ArrayList<Comment> comments;
+    private ArrayList<String> DietTypes;
     private double grade; // Recipe Grade
     private int reviewNumber=0;//Number of user who have reviewed the recipe
     private String[] Steps;
     private String[] IngredientList;
     private int difficulty;
     private Date date;
+    private String RecipeRolls;
+    private String RecipeTimes;
+    private String RecipeKinds;
     private int comparingState=0;
     public Recipe(){
 
@@ -65,6 +69,10 @@ public class Recipe implements Tagged<Recipe> {
         this.reviewNumber=0;
         this.subscribers=new ArrayList<>();
         this.comments=new ArrayList<>();
+        this.DietTypes=builder.diets;
+        this.RecipeKinds=builder.recipeKind.name();
+        this.RecipeRolls=builder.recipeRoll.name();
+        this.RecipeTimes= builder.recipeTime.name();
         IdGiver++;
     }
     public void setScore(int data){
@@ -199,6 +207,7 @@ public class Recipe implements Tagged<Recipe> {
         private RecipeRoll recipeRoll;
         private int difficulty;
         private DoubleList<DietType> dietType;
+        private ArrayList<String> diets;
         private String[] IngredientList;
         private String[] Steps;
         private ArrayList<String> tags;
@@ -286,6 +295,7 @@ public class Recipe implements Tagged<Recipe> {
             DoubleList<String> tempDiets=LinkedListTool.toStringList(dietType);
             List=tool.Merge(List,tempDiets);
             this.tags=tool.toJavaList(List);
+            this.diets=tool.toJavaList(tempDiets);
 
         }
         public void build(){
@@ -294,7 +304,7 @@ public class Recipe implements Tagged<Recipe> {
             if (dietType==null)dietType=new DoubleList<>();
             if(IngredientList==null) IngredientList=new String[0];
             if(Steps==null)Steps =new String[0];
-
+            if(diets==null)diets=new ArrayList<>();
         }
 
     }
