@@ -40,7 +40,7 @@ public class RecipeForm extends HttpServlet {
         String RecipeRoll=req.getParameter(this.RecipeRoll);
         String RecipeTime=req.getParameter(this.RecipeTime);
         String dietTypes=req.getParameter(this.DietType);
-        int Portion=Integer.parseInt(req.getParameter(portions));
+        //int Portion=Integer.parseInt(req.getParameter(portions));
         String[] DietTypes=dietTypes.split(divisor);
 
         for(int i=0;i<DietTypes.length;i++){
@@ -67,7 +67,7 @@ public class RecipeForm extends HttpServlet {
                 .setRecipeName(RecipeName)
                 .setDifficulty(difficulty)
                 .setAuthor(UserName)
-                .setPortions(Portion)
+                //setPortions(Portion)
         );
         TreeConsultant.RecipeOwner(UserName).addRecipe(recipe);
         RecipeTree recipeTree=new RecipeTree();
