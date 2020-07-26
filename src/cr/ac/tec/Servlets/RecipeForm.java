@@ -4,6 +4,7 @@ import cr.ac.tec.DataSaved.InAppData.Recipes.Difficulty;
 import cr.ac.tec.DataSaved.InAppData.Recipes.Recipe;
 import cr.ac.tec.DataSaved.InfoTree.RecipeTree;
 import cr.ac.tec.DataSaved.InfoTree.TreeConsultant;
+import cr.ac.tec.DataSaved.InfoTree.UserTree;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -63,6 +64,7 @@ public class RecipeForm extends HttpServlet {
         TreeConsultant.RecipeOwner(UserName).addRecipe(recipe);
         RecipeTree recipeTree=new RecipeTree();
         recipeTree.attach(recipe);
+        UserTree.getInstance().updateFile();
         resp.getWriter().print("HolaHOLA");
 
     }

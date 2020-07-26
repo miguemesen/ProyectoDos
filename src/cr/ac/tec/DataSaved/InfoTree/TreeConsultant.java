@@ -9,7 +9,11 @@ import cr.ac.tec.DataSaved.InAppData.Recipes.Recipe;
 import cr.ac.tec.DataSaved.Interfaces.RecipeOwners;
 import cr.ac.tec.DataStructures.ArrayList.ArrayTools;
 import cr.ac.tec.DataStructures.LinkedList.List.DoubleList;
+import cr.ac.tec.DataStructures.LinkedList.List.Set;
+import cr.ac.tec.DataStructures.LinkedList.List.Tools.LinkedListTool;
 import cr.ac.tec.DataStructures.LinkedList.Sorting.InsertionDouble;
+import cr.ac.tec.TextMatching.TextFinder;
+import cr.ac.tec.TextMatching.TextMatcherWithTags;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -108,6 +112,31 @@ public class TreeConsultant {
     public static Recipe getRecipesFromID(int ID){
         initializer();
         return recipeTree.getMember(new Recipe(ID));
+    }
+    public static ArrayList<Chef> FindChef(String Name){
+        if(Name==null)return null;
+        initializer();
+        TextFinder<Chef> finder=new TextFinder<>();
+        Set<Chef> chefSet=finder.matching(chefTree.getList(),Name);
+        LinkedListTool<Chef>chefLinkedListTool=new LinkedListTool<>();
+        return chefLinkedListTool.toJavaList(chefSet);
+    }
+    public static ArrayList<User> FindUser(String UserName){
+        if(UserName==null)return null;
+        initializer();
+        TextFinder<User> find=new TextFinder<>();
+        Set<User> userSet=find.matching(userTree.getList(),UserName);
+        LinkedListTool<User> userLinkedListTool=new LinkedListTool<>();
+        return userLinkedListTool.toJavaList(userSet);
+    }
+    public static ArrayList<Recipe> getRecipe(String text,String...tags){
+        if(text==null || tags==null)return null;
+        initializer();
+        TextMatcherWithTags<Recipe> matcher=new TextMatcherWithTags<>();
+        Set<Recipe> recipeSet=matcher.matching(recipeTree.getList(),text,tags);
+        LinkedListTool<Recipe> recipeLinkedListTool=new LinkedListTool<>();
+        return recipeLinkedListTool.toJavaList(recipeSet);
+
     }
 
 

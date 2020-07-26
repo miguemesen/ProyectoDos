@@ -7,7 +7,7 @@ import cr.ac.tec.Files.JsonExchange;
 public class CompanyTree extends InfoTree<Company> {
     private static CompanyTree instance;
     private CompanyTree(){
-        route="C:\\Users\\Gabriel Solano\\Documents\\GitHub\\SegundoProyectoDatos1\\web\\Resources\\JsonFiles\\Companies.json";
+        route="C:\\Tecnologico de Costa Rica\\Tercer Semestre\\Algoritmos y estructuras\\COOKTIMEProyect\\web\\Resources\\JsonFiles\\Companies.json";
         Tree=new SplayTree();
         this.getData();
     }

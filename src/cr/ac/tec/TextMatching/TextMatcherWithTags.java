@@ -5,6 +5,7 @@ import cr.ac.tec.DataStructures.LinkedList.List.DoubleList;
 import cr.ac.tec.DataStructures.LinkedList.List.Set;
 
 public class TextMatcherWithTags<T extends Tagged> extends cr.ac.tec.TextMatching.TextFinder<T> {
+
     public Set<T> matching(DoubleList<T> source, String toFind, String ...tags) {
         Set<T> List=super.matching(source, toFind);
         if(tags==null)return List;

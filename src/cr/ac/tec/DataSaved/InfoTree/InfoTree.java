@@ -28,7 +28,6 @@ public abstract class InfoTree<T extends Comparable> implements jsonSource {
     }
     public T getMember(T Member){ return Tree.get(Member); }
     public void updateFile(){
-        System.out.println("Updating filesa");
         ArrayList<T> arrayList=Tree.getArrayList();
         for(int i=0;i<arrayList.size();i++){
             System.out.println(arrayList.get(i));

@@ -17,6 +17,7 @@ public class TextFinder<T extends Comparable> {
         if(request==null || request.equals(""))return returning;
         if(returning==null)return null;
         String Regex="^"+request;
+        Regex=request;
         Pattern pattern=Pattern.compile(Regex,Pattern.CASE_INSENSITIVE);
         Matcher matcher;
         T element;
