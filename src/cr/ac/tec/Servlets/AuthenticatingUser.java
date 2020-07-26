@@ -12,20 +12,33 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
-@WebServlet(value = "/proving",name = "SoloPruebasd")
+@WebServlet(value = "/logs",name = "SoloPruebasd")
 public class AuthenticatingUser extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.setContentType("application/json");
-        String toReturn;
-        PrintWriter printWriter=resp.getWriter();
-        UserTree userTree= UserTree.getInstance();
-        String name=req.getParameter("UserName");
-        String password= req.getParameter("Password");
-        password= MD5.getMD5(password);
-        String result= TreeConsultant.getUser(name,password);
-        if(result=="'")result="No encontre nada";
-        printWriter.print(result);
+        Runnable runnable=new Runnable() {
+            @Override
+            public void run() {
+                synchronized (this) {
+                    try {
+                        resp.setContentType("application/json");
+                        String toReturn;
+                        PrintWriter printWriter = resp.getWriter();
+                        UserTree userTree = UserTree.getInstance();
+                        String name = req.getParameter("UserName");
+                        String password = req.getParameter("Password");
+                        password = MD5.getMD5(password);
+                        String result = TreeConsultant.getUser(name, password);
+                        printWriter.print(result);
+                    } catch (Exception e) {
+                    }
+
+                }
+            }
+        };
+        Thread thread=new Thread(runnable);
+        thread.run();
+
     }
 
     @Override

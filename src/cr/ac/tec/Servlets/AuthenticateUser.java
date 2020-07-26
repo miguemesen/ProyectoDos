@@ -13,14 +13,13 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 
-@WebServlet(value ="/logs",name = "Authenticate")
+@WebServlet(value ="/proving",name = "Authenticate")
 public class AuthenticateUser extends HttpServlet {
     private final String UserName="UserName";
     private final String Password="Password";
     private final String DMT="";
     private final int NO=0;
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        //response.setContentType("application/json");
         String toReturn;
         PrintWriter printWriter=response.getWriter();
         UserTree userTree= UserTree.getInstance();
